@@ -1,55 +1,62 @@
 package GameSetup;
 
 import Database.PlayerManager;
+import Database.RankingManager;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
-    public static void first_menu(String user){
+
+    protected static String centerText(String text, int border) {
+        int padding = (border - text.length()) / 2;
+        StringBuilder centeredText = new StringBuilder();
+        for (int i = 0; i < padding; i++) {
+            centeredText.append(" ");
+        }
+        centeredText.append(text);
+        return centeredText.toString();
+    }
+
+    public static void first_menu(String user) {
         int playerId = PlayerManager.getUserIdByUsername(user);
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println(user);
-            System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────────┐");
-            System.out.println("\t\t\t\t\t[1] New Game");
-            System.out.println("\t\t\t\t\t[2] Personal Highscore");
-            System.out.println("\t\t\t\t\t[3] Ranking");
-            System.out.println("\t\t\t\t\t[4] Setting");
+        Scanner scanner = new Scanner(System.in); 
+        while (true) {
+            
+            String border = "┌─────────────────────────────────────────────────────────────────────────────────────┐";
+            System.out.println(border);
+            System.out.println(centerText("[1] New Game", border.length()));
+            System.out.println(centerText("[2] Records ", border.length()));
+            System.out.println(centerText("[3] Ranking ", border.length()));
+            System.out.println(centerText("[4] Setting ", border.length()));
+            System.out.println(centerText("[5] Exit    ", border.length()));
             
             int action;
             while (true) {
-                System.out.print("\t\t\tAction(1-4):");
+                System.out.print(centerText("Action(1-5): ", border.length()));
                 try {
                     action = scanner.nextInt();
-                    scanner.nextLine(); // consume newline
-        
-                    // Validate input
-                    if (action >= 1 && action <= 3) {
-                        break; // Exit the loop if valid choice
+                    scanner.nextLine();
+    
+                    if (action >= 1 && action <= 5) {
+                        break; 
                     } else {
-                        System.out.println("\t\t\tInvalid input. Please enter 1-4.");
+                        System.out.println(centerText("Invalid input. Please enter 1-5.", border.length()));
                     }
                 } catch (InputMismatchException e) {
-                    System.out.println("\t\t\tInvalid input. Please enter a number (1-4).");
-                    scanner.nextLine(); // Clear the invalid input
+                    System.out.println(centerText("Invalid input. Please enter 1-5.", border.length()));
+                    scanner.nextLine(); 
                 }
             }
-
-            switch (action){
-                case 1 -> {
-                    Game.GameRun(user, playerId);
-                }
-                case 2 -> {
-                    PlayerManager.showGameRecordsByUserId(playerId);
-                }
-                case 3 ->{
-                    System.out.println("\n\t\t\t\t\tRanking functionality is not implemented yet.");
-                }
-                case 4 -> {
-                    System.out.println("\n\t\t\t\t\tSetting functionality is not implemented yet.");
-                }
-
+            
+            switch (action) {
+                case 1 -> Game.GameRun(user, playerId);
+                case 2 -> PlayerManager.showGameRecordsByUserId(playerId, user);
+                case 3 -> RankingManager.displayRankings(user);
+                case 4 -> System.out.println("\n\t\t\t\t\tSetting functionality is not implemented yet.");
+                case 5 -> System.exit(action);
             }
         }
-
     }
-}
+} 
+    
+

@@ -1,6 +1,8 @@
 package Database;
 
-import GameSetup.Menu;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,22 +11,26 @@ import java.sql.Statement;
 
 
 public class RankingManager {
-        public static void updateRanking(int userId,double score) {
+    public static void updateRanking(int userId, double score) {
+        BigDecimal roundedScore = new BigDecimal(score).setScale(2, RoundingMode.HALF_UP);
+
         String sql = """
             INSERT INTO rankings (user_id, best_score)
             VALUES (?, ?)
-            ON CONFLICT(user_id) DO UPDATE SET best_score = MAX(best_score, ?);
+            ON DUPLICATE KEY UPDATE best_score = GREATEST(best_score, ?);
             """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
             pstmt.setInt(1, userId);
-            pstmt.setDouble(2, score);
-            pstmt.setDouble(3, score);
+            pstmt.setBigDecimal(2, roundedScore);
+            pstmt.setBigDecimal(3, roundedScore);
             pstmt.executeUpdate();
+            
             System.out.println("Ranking updated successfully.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error updating ranking: " + e.getMessage());
         }
     }
 
@@ -49,9 +55,11 @@ public class RankingManager {
             System.in.read();
             System.out.print("\033[H\033[2J");
             System.out.flush();
-            Menu.first_menu(user);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 }

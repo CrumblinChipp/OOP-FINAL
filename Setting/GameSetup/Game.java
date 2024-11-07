@@ -1,6 +1,5 @@
 /// THINGS THAT NEED TO BE DONE
 /// --CITY NAME INPUT FUNCTION
-/// --MESSAGE AFTER DECISION FUNCTION(SHOULD BE DONE FOR EACH DECISION UNIQUE TO EACH METHOD)--MADE: NEED ADJUSTMENT
 /// --ADDITIONAL SCENARIOS
 /// --ADDITIONAL ACHIEVEMENT 
 package GameSetup;
@@ -82,17 +81,16 @@ public class Game {
                 System.out.print("\t\tPlease enter your choice (1, 2, or 3):");
                 try {
                     choice = scanner.nextInt();
-                    scanner.nextLine(); // consume newline
+                    scanner.nextLine(); 
         
-                    // Validate input
                     if (choice >= 1 && choice <= 3) {
-                        break; // Exit the loop if valid choice
+                        break;
                     } else {
                         System.out.println("\t\tInvalid input. Please enter 1, 2, or 3.");
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("\t\tInvalid input. Please enter a number (1, 2, or 3).");
-                    scanner.nextLine(); // Clear the invalid input
+                    scanner.nextLine(); 
                 }
             }
             System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
@@ -222,8 +220,5 @@ public class Game {
         System.out.println("\t\t\t└───────────────────────────────┘");
         scanner.nextLine();
         clearScreen();
-        scanner.close();
-        Menu.first_menu(user);
-        
     }
 }

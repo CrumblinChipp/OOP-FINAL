@@ -118,7 +118,6 @@ public static void displayChoices(List<String> choices) {
     for (int i = 0; i < choices.size(); i++) {
         System.out.println("\t\t" + (i + 1) + ". " + choices.get(i) + "\n");
     }
-    System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
 }
 
 }

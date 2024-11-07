@@ -29,14 +29,7 @@ public class PlayerManager {
             pstmt.setString(2, password);
             
             ResultSet resultSet = pstmt.executeQuery();
-            
-            if (resultSet.next()) {
-                System.out.println("Login successful for user: " + username);
-                return true;
-            } else {
-                System.out.println("Invalid credentials for user: " + username);
-                return false;
-            }
+            return resultSet.next();
         } catch (SQLException e) {
             System.out.println("Error during credential check: " + e.getMessage());
             return false;
@@ -90,7 +83,7 @@ public class PlayerManager {
         }
     }
 
-    public static void showGameRecordsByUserId(int userId) {
+    public static void showGameRecordsByUserId(int userId, String user) {
         String query = "SELECT score, date_played FROM game_records WHERE user_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -116,7 +109,6 @@ public class PlayerManager {
                 String datePlayed = rs.getString("date_played");
                 int score = rs.getInt("score");
 
-                // Format each row
                 System.out.printf("\t\t\t│ %-11s │ %-15d │%n", datePlayed, score);
             }
 
@@ -124,12 +116,11 @@ public class PlayerManager {
                 System.out.println("\t\t\t│      No records found.        │");
             }
 
-            // Display footer
             System.out.println("\t\t\t└─────────────┴─────────────────┘");
             System.out.println("\t\t\t   Press Enter to Return");
-
-            // Wait for Enter to return
             System.in.read();
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
 
         } catch (SQLException e) {
             System.out.println("Error retrieving game records.");
