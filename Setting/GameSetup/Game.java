@@ -9,10 +9,6 @@ import java.util.*;
 
 public class Game {
 
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
     public static void GameRun(String user, int playerId){
 
         Random random =new Random();
@@ -57,7 +53,7 @@ public class Game {
         System.out.println(  "\t\t\t   PRESS ENTER TO CONTINUE..");
         System.out.println("\t\t\t└───────────────────────────────┘");
         scanner.nextLine();
-        clearScreen();
+        Extra.clearScreen();
         List<Integer> scenarioNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         int life = 3;
         int totalYear = 0;
@@ -209,7 +205,7 @@ public class Game {
             System.out.println(  "\t\t\t    PRESS ENTER TO CONTINUE..");
             System.out.println("\t\t\t└───────────────────────────────┘");
             scanner.nextLine();
-            clearScreen();
+            Extra.clearScreen();
         }
 
         double totalScore = city.printEndGame(level, user, city, totalYear, life);
@@ -219,6 +215,6 @@ public class Game {
         System.out.println(  "\t\t\t    PRESS ENTER TO CONTINUE..");
         System.out.println("\t\t\t└───────────────────────────────┘");
         scanner.nextLine();
-        clearScreen();
+        Extra.clearScreen();
     }
 }

@@ -1,4 +1,5 @@
 import Database.PlayerManager;
+import GameSetup.Extra;
 import GameSetup.Menu;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -18,13 +19,13 @@ public class Main
         Scanner input = new Scanner(System.in);
         while (true){
             System.out.println(welcome);
-            String borderTop = "┌─────────────────────────────────────────────────────────────────────────────────────────┐";
-            System.out.println(borderTop);
-            System.out.println(centerText("[1] Log in ", borderTop.length()));
-            System.out.println(centerText("[2] Sign up", borderTop.length()));
+            String border = "┌─────────────────────────────────────────────────────────────────────────────────────────┐";
+            System.out.println(border);
+            System.out.println(Extra.formatText("[1] Log in ", border.length()));
+            System.out.println(Extra.formatText("[2] Sign up", border.length()));
             int action;                
             while (true) {
-                System.out.print(centerText("Action(1 or 2): ", borderTop.length()));
+                System.out.print(Extra.centerTextWithInput("Action(1 or 2): ", border.length()));
                 try {
                     action = input.nextInt();
                     input.nextLine();
@@ -32,10 +33,10 @@ public class Main
                     if (action >= 1 && action <= 2) {
                         break; 
                     } else {
-                        System.out.print(centerText("Invalid input. Please enter 1 or 2.", borderTop.length()));
+                        System.out.println(Extra.formatText("Invalid input. Please enter 1 or 2.", border.length()));
                     }
                 } catch (InputMismatchException e) {
-                    System.out.println(centerText("Invalid input. Please enter 1 or 2.", borderTop.length()));
+                    System.out.println(Extra.formatText("Invalid input. Please enter 1 or 2.", border.length()));
                     input.nextLine(); 
                 }
             }
@@ -43,34 +44,36 @@ public class Main
 
             switch(action){
                 case 1 -> {
-                    System.out.print(centerText("Enter Username: ", borderTop.length()));
+                    System.out.print(Extra.centerTextWithInput("Enter Username: ", border.length()));
                     String username = input.nextLine();
-                    System.out.print(centerText("Enter Password: ", borderTop.length()));
+                    System.out.print(Extra.centerTextWithInput("Enter Password: ", border.length()));
                     String password = input.nextLine();
                     if (PlayerManager.checkCredentials(username, password) == true){
-                        System.out.println(centerText("Login successful for user: " + username, borderTop.length()));
-                        System.out.println(centerText("┌───────────────────────────────┐", borderTop.length()));
-                        System.out.println(centerText("PRESS ENTER TO CONTINUE..", borderTop.length()));
-                        System.out.println(centerText("└───────────────────────────────┘",borderTop.length()));
+                        System.out.println(Extra.formatText("Login successful for user: " + username, border.length()));
+                        System.out.println(Extra.formatText("┌───────────────────────────────┐", border.length()));
+                        System.out.println(Extra.formatText("PRESS ENTER TO CONTINUE..", border.length()));
+                        System.out.println(Extra.formatText("└───────────────────────────────┘",border.length()));
+                        input.nextLine();
                         Menu.first_menu(username);
                     }else{
-                        System.out.println(centerText("Login Failed" + username, borderTop.length()));
-                        System.out.println(centerText("┌───────────────────────────────┐", borderTop.length()));
-                        System.out.println(centerText("PRESS ENTER TO RETURN..", borderTop.length()));
-                        System.out.println(centerText("└───────────────────────────────┘",borderTop.length()));
+                        System.out.println(Extra.formatText("Login Failed" + username, border.length()));
+                        System.out.println(Extra.formatText("┌───────────────────────────────┐", border.length()));
+                        System.out.println(Extra.formatText("PRESS ENTER TO RETURN..", border.length()));
+                        System.out.println(Extra.formatText("└───────────────────────────────┘",border.length()));
                     }
                 }
 
                 case 2 -> {
-                    System.out.print(centerText("Enter Username: ", borderTop.length()));
+                    System.out.print(Extra.centerTextWithInput("Enter Username: ", border.length()));
                     String username = input.nextLine();
-                    System.out.print(centerText("Enter Password: ", borderTop.length()));
+                    System.out.print(Extra.centerTextWithInput("Enter Password: ", border.length()));
                     String password = input.nextLine();
                     PlayerManager.addPlayer(username, password);
-                    System.out.println(centerText("Sign up successful " + username, borderTop.length()));
-                    System.out.println(centerText("┌───────────────────────────────┐", borderTop.length()));
-                    System.out.println(centerText("PRESS ENTER TO CONTINUE..", borderTop.length()));
-                    System.out.println(centerText("└───────────────────────────────┘",borderTop.length()));
+                    System.out.println(Extra.formatText("Sign up successful " + username, border.length()));
+                    System.out.println(Extra.formatText("┌───────────────────────────────┐", border.length()));
+                    System.out.println(Extra.formatText("PRESS ENTER TO CONTINUE..", border.length()));
+                    System.out.println(Extra.formatText("└───────────────────────────────┘",border.length()));
+                    input.nextLine();
                     Menu.first_menu(username);
                     
                 }
@@ -78,13 +81,4 @@ public class Main
         }
     } 
 
-    protected static String centerText(String text, int border) {
-        int padding = (border - text.length()) / 2;
-        StringBuilder centeredText = new StringBuilder();
-        for (int i = 0; i < padding; i++) {
-            centeredText.append(" ");
-        }
-        centeredText.append(text);
-        return centeredText.toString();
-    }
 }

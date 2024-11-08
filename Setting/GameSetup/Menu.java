@@ -7,16 +7,6 @@ import java.util.Scanner;
 
 public class Menu {
 
-    protected static String centerText(String text, int border) {
-        int padding = (border - text.length()) / 2;
-        StringBuilder centeredText = new StringBuilder();
-        for (int i = 0; i < padding; i++) {
-            centeredText.append(" ");
-        }
-        centeredText.append(text);
-        return centeredText.toString();
-    }
-
     public static void first_menu(String user) {
         int playerId = PlayerManager.getUserIdByUsername(user);
         Scanner scanner = new Scanner(System.in); 
@@ -24,15 +14,16 @@ public class Menu {
             
             String border = "┌─────────────────────────────────────────────────────────────────────────────────────┐";
             System.out.println(border);
-            System.out.println(centerText("[1] New Game", border.length()));
-            System.out.println(centerText("[2] Records ", border.length()));
-            System.out.println(centerText("[3] Ranking ", border.length()));
-            System.out.println(centerText("[4] Setting ", border.length()));
-            System.out.println(centerText("[5] Exit    ", border.length()));
+            System.out.println(Extra.formatText("[1] New Game", border.length()));
+            System.out.println(Extra.formatText("[2] Records ", border.length()));
+            System.out.println(Extra.formatText("[3] Ranking ", border.length()));
+            System.out.println(Extra.formatText("[4] Setting ", border.length()));
+            System.out.println(Extra.formatText("[5] Exit    ", border.length()));
+
             
             int action;
             while (true) {
-                System.out.print(centerText("Action(1-5): ", border.length()));
+                System.out.print(Extra.centerTextWithInput("Action(1-5): ", border.length()));
                 try {
                     action = scanner.nextInt();
                     scanner.nextLine();
@@ -40,10 +31,10 @@ public class Menu {
                     if (action >= 1 && action <= 5) {
                         break; 
                     } else {
-                        System.out.println(centerText("Invalid input. Please enter 1-5.", border.length()));
+                        System.out.println(Extra.formatText("Invalid input. Please enter 1-5.", border.length()));
                     }
                 } catch (InputMismatchException e) {
-                    System.out.println(centerText("Invalid input. Please enter 1-5.", border.length()));
+                    System.out.println(Extra.formatText("Invalid input. Please enter 1-5.", border.length()));
                     scanner.nextLine(); 
                 }
             }

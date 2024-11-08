@@ -142,16 +142,6 @@ public abstract class Decision {
         return description;
     }
 
-    protected String centerText(String text) {
-        int padding = (border.length() - text.length()) / 2;
-        StringBuilder centeredText = new StringBuilder();
-        for (int i = 0; i < padding; i++) {
-            centeredText.append(" ");
-        }
-        centeredText.append(text);
-        return centeredText.toString();
-    }
-
 }
 // HOSPITAL CRISIS
 class DecisionScenario1 extends Decision {
@@ -163,27 +153,21 @@ class DecisionScenario1 extends Decision {
     @Override
     public void applyEffectHigh(City city, int level) {
         pointAllocation(level, 1, city, "healthcare", "morale");
-        System.out.println(border);
-        System.out.println(centerText("New hospitals are under construction to handle the influx of patients!"));
-        System.out.println(centerText("(+)HEALTH    (-)FUND    (+)MORALE"));
+        Extra.centerText("New hospitals are under construction to handle the influx of patients! \n (+)HEALTH    (-)FUND    (+)MORALE", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectModerate(City city, int level) {
         pointAllocation(level, 2, city, "healthcare", "morale");
-        System.out.println(border);
-        System.out.println(centerText("Existing hospitals receive additional funding to improve services."));
-        System.out.println(centerText("(+)HEALTH    (-)FUND"));
+        Extra.centerText("Existing hospitals receive additional funding to improve services. \n (+)HEALTH    (-)FUND", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectNone(City city, int level) {
-        pointAllocation(level, 2, city, "healthcare", "morale");
-        System.out.println(border);
-        System.out.println(centerText("The situation worsens as healthcare demands continue to rise."));
-        System.out.println(centerText("(-)HEALTH    (-)MORALE"));
+        pointAllocation(level, 3, city, "healthcare", "morale");
+        Extra.centerText("The situation worsens as healthcare demands continue to rise. \n (-)HEALTH    (-)MORALE", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 }
@@ -198,27 +182,21 @@ class DecisionScenario2 extends Decision {
     @Override
     public void applyEffectHigh(City city, int level) {
         pointAllocation(level, 1, city, "innovation", "morale");
-        System.out.println(border);
-        System.out.println(centerText("Full disaster relief fund allocated. Citizens are relieved!"));
-        System.out.println(centerText("(+)INNOVATION    (-)FUND    (+)MORALE"));
+        Extra.centerText("Full disaster relief fund allocated. Citizens are relieved! \n (+)INNOVATION    (-)FUND    (+)MORALE", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectModerate(City city, int level) {
         pointAllocation(level, 2, city, "innovation", "morale");
-        System.out.println(border);
-        System.out.println(centerText("Limited fund provided. Essential repairs begin, but citizens remain concerned."));
-        System.out.println(centerText("(+)INNOVATION    (-)FUND"));
+        Extra.centerText("Limited fund provided. Essential repairs begin, but citizens remain concerned. \n (+)INNOVATION    (-)FUND", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectNone(City city, int level) {
         pointAllocation(level, 3, city, "innovation", "morale");
-        System.out.println(border);
-        System.out.println(centerText("No action taken. Citizens are frustrated, and infrastructure worsens."));
-        System.out.println(centerText("(-)INNOVATION    (-)MORALE"));
+        Extra.centerText("No action taken. Citizens are frustrated, and infrastructure worsens. \n (-)INNOVATION    (-)MORALE", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 }
@@ -233,27 +211,21 @@ class DecisionScenario3 extends Decision {
     @Override
     public void applyEffectHigh(City city, int level) {
         pointAllocation(level, 1, city, "environment", "healthcare");
-        System.out.println(border);
-        System.out.println(centerText("Environmental standards are now stricter, and pollution levels have decreased"));
-        System.out.println(centerText("(+)ENVIRONMENT    (+)HEALTH   (-)FUND"));
+        Extra.centerText("Environmental standards are now stricter, and pollution levels have decreased \n (+)ENVIRONMENT    (+)HEALTH   (-)FUND", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectModerate(City city, int level) {
         pointAllocation(level, 2, city, "environment", "morale");
-        System.out.println(border);
-        System.out.println(centerText("Some new regulations are in place, aiming to reduce pollution"));
-        System.out.println(centerText("(+)ENVIRONMENT   (-)FUND"));
+        Extra.centerText("Some new regulations are in place, aiming to reduce pollution \n (+)ENVIRONMENT   (-)FUND", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectNone(City city, int level) {
         pointAllocation(level, 3, city, "environment", "morale");
-        System.out.println(border);
-        System.out.println(centerText("Pollution continues, and citizens grow more concerned about the environment"));
-        System.out.println(centerText("(-)ENVIRONMENT     (-)MORALE"));
+        Extra.centerText("Pollution continues, and citizens grow more concerned about the environment \n (-)ENVIRONMENT     (-)MORALE", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 }
@@ -268,27 +240,21 @@ class DecisionScenario4 extends Decision {
     @Override
     public void applyEffectHigh(City city, int level) {
         pointAllocation(level, 1, city, "morale", "healthcare");
-        System.out.println(border);
-        System.out.println(centerText("Police funding and community programs are ramped up. Citizens feel relief and hope."));
-        System.out.println(centerText("(+)MORALE    (+)HEALTH   (-)FUND"));
+        Extra.centerText("Police funding and community programs are ramped up. Citizens feel relief and hope. \n (+)MORALE    (+)HEALTH   (-)FUND", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectModerate(City city, int level) {
         pointAllocation(level, 2, city, "morale", "morale");
-        System.out.println(border);
-        System.out.println(centerText("Police funding increases, boosting security, but some citizens feel overlooked."));
-        System.out.println(centerText("(+)MORALE   (-)FUND"));
+        Extra.centerText("Police funding increases, boosting security, but some citizens feel overlooked. \n (+)MORALE   (-)FUND", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectNone(City city, int level) {
         pointAllocation(level, 3, city, "morale", "morale");
-        System.out.println(border);
-        System.out.println(centerText("Tensions rise as no action is taken. The city struggles with growing unease."));
-        System.out.println(centerText("(-)MORALE    (-)HEALTH"));
+        Extra.centerText("Tensions rise as no action is taken. The city struggles with growing unease. \n (-)MORALE    (-)HEALTH", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 }
@@ -303,30 +269,21 @@ class DecisionScenario5 extends Decision {
     @Override
     public void applyEffectHigh(City city, int level) {
         pointAllocation(level, 1, city, "innovation", "morale");
-        System.out.println(border);
-        System.out.println(centerText("The stimulus package injects capital into the economy,"));
-        System.out.println(centerText("hoping to create jobs and revive businesses."));
-        System.out.println(centerText("(+)INNOVATION    (+)MORALE   (-)FUND"));
+        Extra.centerText("The stimulus package injects capital into the economy, hoping to create jobs and revive businesses. \n (+)INNOVATION    (+)MORALE   (-)FUND", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectModerate(City city, int level) {
         pointAllocation(level, 2, city, "innovation", "morale");
-        System.out.println(border);
-        System.out.println(centerText("Small businesses receive tax breaks, easing their"));
-        System.out.println(centerText("financial burdens and encouraging growth."));
-        System.out.println(centerText("(+)INNOVATION   (-)FUND"));
+        Extra.centerText("Small businesses receive tax breaks, easing their financial burdens and encouraging growth. \n (+)INNOVATION   (-)FUND", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectNone(City city, int level) {
         pointAllocation(level, 3, city, "innovation", "morale");
-        System.out.println(border);
-        System.out.println(centerText("The economy continues to struggle as citizens grow"));
-        System.out.println(centerText("frustrated with the lack of intervention."));
-        System.out.println(centerText("(-)INNOVATION    (-)MORALE"));
+        Extra.centerText("The economy continues to struggle as citizens grow frustrated with the lack of intervention. \n (-)INNOVATION    (-)MORALE", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 }
@@ -341,30 +298,21 @@ class DecisionScenario6 extends Decision {
     @Override
     public void applyEffectHigh(City city, int level) {
         pointAllocation(level, 1, city, "education", "morale");
-        System.out.println(border);
-        System.out.println(centerText("The city embarks on a major educational transformation,"));
-        System.out.println(centerText("hoping to reshape the future for its youth."));
-        System.out.println(centerText("(+)EDUCATION    (+)MORALE   (-)FUND"));
+        Extra.centerText("The city embarks on a major educational transformation, hoping to reshape the future for its youth. \n (+)EDUCATION    (+)MORALE   (-)FUND", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectModerate(City city, int level) {
         pointAllocation(level, 2, city, "education", "morale");
-        System.out.println(border);
-        System.out.println(centerText("The city takes steps to improve education gradually,"));
-        System.out.println(centerText("balancing progress with stability."));
-        System.out.println(centerText("(+)EDUCATION   (-)FUND"));
+        Extra.centerText("The city takes steps to improve education gradually, balancing progress with stability. \n (+)EDUCATION   (-)FUND", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
     @Override
     public void applyEffectNone(City city, int level) {
         pointAllocation(level, 3, city, "education", "morale");
-        System.out.println(border);
-        System.out.println(centerText("The city overlooks the teachers' demands,"));
-        System.out.println(centerText("leaving the system as it is for now."));
-        System.out.println(centerText("(-)EDUCATION    (-)MORALE"));
+        Extra.centerText("The city overlooks the teachers' demands, leaving the system as it is for now. \n (-)EDUCATION    (-)MORALE", border.length());
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 }

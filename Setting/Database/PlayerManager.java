@@ -42,7 +42,6 @@ public class PlayerManager {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             
-            // Set the username parameter for the prepared statement
             pstmt.setString(1, username);
             
             // Execute the query and process the result
