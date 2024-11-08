@@ -5,10 +5,9 @@ import java.io.IOException;
 public class Extra {
 
     public static void clearScreen() {
-        String border = "┌────────────────────────────────────────────────────────────────────────────────────┐";
-        System.out.println(formatText("┌───────────────────────────────┐", border.length()));
-        System.out.println(formatText("PRESS ENTER TO CONTINUE..", border.length()));
-        System.out.println(formatText("└───────────────────────────────┘",border.length()));
+        System.out.println(formatText("┌───────────────────────────────┐"));
+        System.out.println(formatText("PRESS ENTER TO CONTINUE.."));
+        System.out.println(formatText("└───────────────────────────────┘"));
 
         try {
             System.in.read();
@@ -21,18 +20,18 @@ public class Extra {
         System.out.flush();
     }
 
-    public static void centerText(String message, int boxWidth) {
-        System.out.println("┌" + "─".repeat(boxWidth) + "┐");
+    public static void centerText(String message) {
+        System.out.println("┌" + "─".repeat(82) + "┐");
     
         int padding = 2; 
-        int maxLineLength = boxWidth - padding * 2;
+        int maxLineLength = 82 - padding * 2;
     
         String[] words = message.split(" ");
         StringBuilder line = new StringBuilder();
     
         for (String word : words) {
             if (line.length() + word.length() + 1 > maxLineLength) {
-                System.out.println(formatText(line.toString(), boxWidth));
+                System.out.println(formatText(line.toString()));
                 line = new StringBuilder();
             }
             if (line.length() > 0) line.append(" ");
@@ -40,25 +39,25 @@ public class Extra {
         }
     
         if (line.length() > 0) {
-            System.out.println(formatText(line.toString(), boxWidth));
+            System.out.println(formatText(line.toString()));
         }
     }
     
-    public static String formatText(String text, int lineWidth) {
-        int padding = (lineWidth - text.length()) / 2;
+    public static String formatText(String text) {
+        int padding = (82 - text.length()) / 2;
         StringBuilder centeredText = new StringBuilder();
     
         centeredText.append(" ".repeat(padding));
     
         centeredText.append(text);
     
-        centeredText.append(" ".repeat(lineWidth - centeredText.length()));
+        centeredText.append(" ".repeat(82 - centeredText.length()));
     
         return centeredText.toString();
     }
     
-    public static String centerTextWithInput(String text, int border) {
-        int padding = (border - text.length()) / 2;
+    public static String centerTextWithInput(String text) {
+        int padding = (82 - text.length()) / 2;
         StringBuilder centeredText = new StringBuilder();
         for (int i = 0; i < padding; i++) {
             centeredText.append(" ");

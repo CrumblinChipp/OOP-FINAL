@@ -12,18 +12,17 @@ public class Menu {
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 
-                String border = "┌─────────────────────────────────────────────────────────────────────────────────────┐";
-                System.out.println(border);
-                System.out.println(Extra.formatText("[1] New Game", border.length()));
-                System.out.println(Extra.formatText("[2] Records ", border.length()));
-                System.out.println(Extra.formatText("[3] Ranking ", border.length()));
-                System.out.println(Extra.formatText("[4] Setting ", border.length()));
-                System.out.println(Extra.formatText("[5] Exit    ", border.length()));
+                System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────┐");
+                System.out.println(Extra.formatText("[1] New Game"));
+                System.out.println(Extra.formatText("[2] Records "));
+                System.out.println(Extra.formatText("[3] Ranking "));
+                System.out.println(Extra.formatText("[4] Setting "));
+                System.out.println(Extra.formatText("[5] Exit    "));
 
                 
                 int action;
                 while (true) {
-                    System.out.print(Extra.centerTextWithInput("Action(1-5): ", border.length()));
+                    System.out.print(Extra.centerTextWithInput("Action(1-5): "));
                     try {
                         action = scanner.nextInt();
                         scanner.nextLine();
@@ -31,10 +30,10 @@ public class Menu {
                         if (action >= 1 && action <= 5) {
                             break; 
                         } else {
-                            System.out.println(Extra.formatText("Invalid input. Please enter 1-5.", border.length()));
+                            System.out.println(Extra.formatText("Invalid input. Please enter 1-5."));
                         }
                     } catch (InputMismatchException e) {
-                        System.out.println(Extra.formatText("Invalid input. Please enter 1-5.", border.length()));
+                        System.out.println(Extra.formatText("Invalid input. Please enter 1-5."));
                         scanner.nextLine(); 
                     }
                 }

@@ -19,13 +19,12 @@ public class Main
         Scanner input = new Scanner(System.in);
         while (true){
             System.out.println(welcome);
-            String border = "┌─────────────────────────────────────────────────────────────────────────────────────────┐";
-            System.out.println(border);
-            System.out.println(Extra.formatText("[1] Log in ", border.length()));
-            System.out.println(Extra.formatText("[2] Sign up", border.length()));
+            System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────────┐");
+            System.out.println(Extra.formatText("[1] Log in "));
+            System.out.println(Extra.formatText("[2] Sign up"));
             int action;                
             while (true) {
-                System.out.print(Extra.centerTextWithInput("Action(1 or 2): ", border.length()));
+                System.out.print(Extra.centerTextWithInput("Action(1 or 2): "));
                 try {
                     action = input.nextInt();
                     input.nextLine();
@@ -33,38 +32,42 @@ public class Main
                     if (action >= 1 && action <= 2) {
                         break; 
                     } else {
-                        System.out.println(Extra.formatText("Invalid input. Please enter 1 or 2.", border.length()));
+                        System.out.println(Extra.formatText("Invalid input. Please enter 1 or 2."));
                     }
                 } catch (InputMismatchException e) {
-                    System.out.println(Extra.formatText("Invalid input. Please enter 1 or 2.", border.length()));
+                    System.out.println(Extra.formatText("Invalid input. Please enter 1 or 2."));
                     input.nextLine(); 
                 }
             }
-            System.out.println("└─────────────────────────────────────────────────────────────────────────────────────────┘");
+            System.out.println();
 
             switch(action){
                 case 1 -> {
-                    System.out.print(Extra.centerTextWithInput("Enter Username: ", border.length()));
+                    System.out.print(Extra.centerTextWithInput("Enter Username: "));
                     String username = input.nextLine();
-                    System.out.print(Extra.centerTextWithInput("Enter Password: ", border.length()));
+                    System.out.println();
+                    System.out.print(Extra.centerTextWithInput("Enter Password: "));
                     String password = input.nextLine();
+                    System.out.println();
                     if (PlayerManager.checkCredentials(username, password) == true){
-                        System.out.println(Extra.formatText("Login successful for user: " + username, border.length()));
+                        System.out.println(Extra.formatText("Login successful for user: " + username));
                         Extra.clearScreen();
                         Menu.first_menu(username);
                     }else{
-                        System.out.println(Extra.formatText("Login Failed" + username, border.length()));
+                        System.out.println(Extra.formatText("Login Failed" + username));
                         Extra.clearScreen();
                     }
                 }
 
                 case 2 -> {
-                    System.out.print(Extra.centerTextWithInput("Enter Username: ", border.length()));
+                    System.out.print(Extra.centerTextWithInput("Enter Username: "));
                     String username = input.nextLine();
-                    System.out.print(Extra.centerTextWithInput("Enter Password: ", border.length()));
+                    System.out.println();
+                    System.out.print(Extra.centerTextWithInput("Enter Password: "));
                     String password = input.nextLine();
+                    System.out.println();
                     PlayerManager.addPlayer(username, password);
-                    System.out.println(Extra.formatText("Sign up successful " + username, border.length()));
+                    System.out.println(Extra.formatText("Sign up successful " + username));
                     Extra.clearScreen();
                     Menu.first_menu(username);
                 }

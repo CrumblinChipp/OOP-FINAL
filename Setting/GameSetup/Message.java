@@ -21,18 +21,32 @@ public class Message {
                 fund = 2;
             }
         }
-      System.out.println("┌───────────────────────────────┐   ┌───────────────────────────────┐   ┌───────────────────────────────┐");
-      System.out.println("   Funds and Morale are given                                                 3 \"Life\" are given.");
-      System.out.println("  based on the city Attribute's          If one attribute reach        A life will be deducted every time");
-      System.out.println("            Status                        critical Level (<"+ critical +"),         an attribute reach a critical level.");
-      System.out.println("      Attribute = \"HIGH\"            Emergency Funds will be used.          Losing all Life will result" );
-      System.out.println("      Funds + "+fund+", Morale + "+morale+"                                                         \"GAME OVER\"");
-      System.out.println("     Attribute = \"MODERATE\"           If Funds is not sufficient,");
-      System.out.println("           Funds + "+(fund-1)+"                   The City tax will increase         Reaching a critical level on");
-      System.out.println("        Attribute = LOW               Affecting the citizens Morale     \"Fund\" will result to a Attribute");
-      System.out.println("           Funds + "+(fund-1)+"                                                      reduction that will take (-5) ");
-      System.out.println("└───────────────────────────────┘   └───────────────────────────────┘       points from each attribute.");
-      System.out.println("                                                                        └───────────────────────────────┘");
+      System.out.println("  ┌──────────────────────────────────────┐   ┌──────────────────────────────────────┐");
+      System.out.println("         Funds and Morale are given");
+      System.out.println("        based on the city Attribute's                 If one attribute reach");
+      System.out.println("                    Status                             critical Level (<"+critical+"), ");
+      System.out.println("              Attribute = \"HIGH\"                 Emergency Funds will be used." );
+      System.out.println("            Funds + "+fund+", Morale + "+morale);
+      System.out.println("            Attribute = \"MODERATE\"               If Funds is not sufficient,");
+      System.out.println("                  Funds + "+(fund-1)+"                       The City tax will increase ");
+      System.out.println("               Attribute = LOW                    Affecting the citizens Morale.");
+      System.out.println("                  Funds + "+(fund-1));
+      System.out.println("  └──────────────────────────────────────┘   └──────────────────────────────────────┘");
+      System.out.println(Extra.formatText("┌──────────────────────────────────────┐"));
+      System.out.println(Extra.formatText("3 \"Life\" are given."));
+      System.out.println(Extra.formatText("A life will be deducted every time"));
+      System.out.println(Extra.formatText("an attribute reach a critical level."));
+      System.out.println(Extra.formatText("Losing all Life will result"));
+      System.out.println(Extra.formatText("\"GAME OVER\""));
+      System.out.println();
+      System.out.println(Extra.formatText("Reaching a critical level on"));
+      System.out.println(Extra.formatText("\"Fund\" will result to a Attribute"));
+      System.out.println(Extra.formatText("reduction that will take (-5)"));
+      System.out.println(Extra.formatText("points from each attribute."));
+      System.out.println(Extra.formatText("└──────────────────────────────────────┘"));
+
+
+
 
     }
 
