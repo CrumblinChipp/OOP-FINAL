@@ -11,7 +11,7 @@ public abstract class Decision {
     public abstract void applyEffectHigh(City city, int level);
     public abstract void applyEffectModerate(City city, int level);
     public abstract void applyEffectNone(City city, int level);
-    String border = "┌─────────────────────────────────────────────────────────────────────────────────────┐";
+    String border = "┌────────────────────────────────────────────────────────────────────────────────────┐";
 
     ///method for applying points on each decision.Varies to each level and decision. made to have general point system.
     public static void pointAllocation (int level, int decision,City city, String primaryAttribute, String secondaryAttribute){

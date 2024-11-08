@@ -1,9 +1,12 @@
 package Database;
+import GameSetup.Extra;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerManager {
     public static void addPlayer(String username, String password) {
@@ -83,52 +86,74 @@ public class PlayerManager {
     }
 
     public static void showGameRecordsByUserId(int userId, String user) {
-        String query = "SELECT score, date_played FROM game_records WHERE user_id = ?";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            // Set the userID parameter
-            pstmt.setInt(1, userId);
-
-            // Execute the query and get results
-            ResultSet rs = pstmt.executeQuery();
-
-            // Display header
-            System.out.println("\t\t\t┌───────────────────────────────┐");
-            System.out.println("\t\t\t│        Game Records           │");
-            System.out.println("\t\t\t├─────────────┬─────────────────┤");
-            System.out.println("\t\t\t│    Date     │      Score      │");
-            System.out.println("\t\t\t├─────────────┼─────────────────┤");
-
-            // Process and display results
-            boolean hasRecords = false;
-            while (rs.next()) {
-                hasRecords = true;
-                String datePlayed = rs.getString("date_played");
-                int score = rs.getInt("score");
-
-                System.out.printf("\t\t\t│ %-11s │ %-15d │%n", datePlayed, score);
+        // Subquery to get the best score and its date
+        String bestScoreQuery = """
+            SELECT score, date_played
+            FROM game_records
+            WHERE user_id = ? AND score = (SELECT MAX(score) FROM game_records WHERE user_id = ?)
+            LIMIT 1
+        """;
+    
+        // Query to fetch the 10 most recent records
+        String recentRecordsQuery = """
+            SELECT score, date_played
+            FROM game_records
+            WHERE user_id = ?
+            ORDER BY date_played DESC
+            LIMIT 10
+        """;
+    
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            
+            // Get best score and its date
+            String bestScoreDate = "";
+            int bestScore = 0;
+            try (PreparedStatement bestScoreStmt = conn.prepareStatement(bestScoreQuery)) {
+                bestScoreStmt.setInt(1, userId);
+                bestScoreStmt.setInt(2, userId);
+                ResultSet bestScoreRs = bestScoreStmt.executeQuery();
+                if (bestScoreRs.next()) {
+                    bestScore = bestScoreRs.getInt("score");
+                    bestScoreDate = bestScoreRs.getString("date_played");
+                }
             }
-
-            if (!hasRecords) {
-                System.out.println("\t\t\t│      No records found.        │");
+    
+            // Get the 10 most recent game records
+            List<String> records = new ArrayList<>();
+            try (PreparedStatement recentStmt = conn.prepareStatement(recentRecordsQuery)) {
+                recentStmt.setInt(1, userId);
+                ResultSet recentRs = recentStmt.executeQuery();
+    
+                while (recentRs.next()) {
+                    int score = recentRs.getInt("score");
+                    String datePlayed = recentRs.getString("date_played");
+                    records.add(String.format("[%-2d]                 %-4d                           %-10s", records.size() + 1, score, datePlayed));
+                }
             }
+    
+            // Display formatted output
+            System.out.println("┌──────────────────────────────────────────────────────────────────────────────────┐");
+            System.out.println("                                    Game Records                                  ");
+            System.out.println("\n\t\t\tScore            |          \tDate Played         \n")  ;
+            System.out.printf("Best Record:    \t %-9d                      %-20s%n", bestScore, bestScoreDate);
+            System.out.println("     ________________________________________________________________________");
 
-            System.out.println("\t\t\t└─────────────┴─────────────────┘");
-            System.out.println("\t\t\t   Press Enter to Return");
-            System.in.read();
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-
+            for (int i = 0; i < 10; i++) {
+                if (i < records.size()) {
+                    System.out.println("    " + records.get(i));
+                } else {
+                    System.out.printf("    [%-2d] %-20s       %-30s%n", i + 1, "", "");
+                }
+            }
+    
+            System.out.println("└──────────────────────────────────────────────────────────────────────────────────┘");
+            Extra.clearScreen();
+    
         } catch (SQLException e) {
             System.out.println("Error retrieving game records.");
-            e.printStackTrace();
         } catch (Exception e) {
             System.out.println("An error occurred.");
-            e.printStackTrace();
         }
     }
     
-
 }

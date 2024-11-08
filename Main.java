@@ -50,16 +50,11 @@ public class Main
                     String password = input.nextLine();
                     if (PlayerManager.checkCredentials(username, password) == true){
                         System.out.println(Extra.formatText("Login successful for user: " + username, border.length()));
-                        System.out.println(Extra.formatText("┌───────────────────────────────┐", border.length()));
-                        System.out.println(Extra.formatText("PRESS ENTER TO CONTINUE..", border.length()));
-                        System.out.println(Extra.formatText("└───────────────────────────────┘",border.length()));
-                        input.nextLine();
+                        Extra.clearScreen();
                         Menu.first_menu(username);
                     }else{
                         System.out.println(Extra.formatText("Login Failed" + username, border.length()));
-                        System.out.println(Extra.formatText("┌───────────────────────────────┐", border.length()));
-                        System.out.println(Extra.formatText("PRESS ENTER TO RETURN..", border.length()));
-                        System.out.println(Extra.formatText("└───────────────────────────────┘",border.length()));
+                        Extra.clearScreen();
                     }
                 }
 
@@ -70,12 +65,8 @@ public class Main
                     String password = input.nextLine();
                     PlayerManager.addPlayer(username, password);
                     System.out.println(Extra.formatText("Sign up successful " + username, border.length()));
-                    System.out.println(Extra.formatText("┌───────────────────────────────┐", border.length()));
-                    System.out.println(Extra.formatText("PRESS ENTER TO CONTINUE..", border.length()));
-                    System.out.println(Extra.formatText("└───────────────────────────────┘",border.length()));
-                    input.nextLine();
+                    Extra.clearScreen();
                     Menu.first_menu(username);
-                    
                 }
             }
         }

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Scenario {
-    static String border = "┌─────────────────────────────────────────────────────────────────────────────────────┐";
+    static String border = "┌────────────────────────────────────────────────────────────────────────────────────┐";
 
 // HEALTHCARE
 public static void scenario1() {

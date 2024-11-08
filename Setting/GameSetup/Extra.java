@@ -1,8 +1,22 @@
 package GameSetup;
 
+import java.io.IOException;
+
 public class Extra {
 
     public static void clearScreen() {
+        String border = "┌────────────────────────────────────────────────────────────────────────────────────┐";
+        System.out.println(formatText("┌───────────────────────────────┐", border.length()));
+        System.out.println(formatText("PRESS ENTER TO CONTINUE..", border.length()));
+        System.out.println(formatText("└───────────────────────────────┘",border.length()));
+
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }

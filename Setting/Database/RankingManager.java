@@ -1,6 +1,6 @@
 package Database;
 
-import java.io.IOException;
+import GameSetup.Extra;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Connection;
@@ -51,15 +51,10 @@ public class RankingManager {
             while (rs.next()) {
                 System.out.println(rs.getString("username") + ": " + rs.getInt("best_score"));
             }
-            System.out.println("\t\t\t   Press Enter to Return");
-            System.in.read();
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
+            Extra.clearScreen();
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 }

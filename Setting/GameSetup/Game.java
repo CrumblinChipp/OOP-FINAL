@@ -49,11 +49,8 @@ public class Game {
         }
 
         Message.tutorialMessage(level);
-        System.out.println("\t\t\t┌───────────────────────────────┐");
-        System.out.println(  "\t\t\t   PRESS ENTER TO CONTINUE..");
-        System.out.println("\t\t\t└───────────────────────────────┘");
-        scanner.nextLine();
         Extra.clearScreen();
+        
         List<Integer> scenarioNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         int life = 3;
         int totalYear = 0;
@@ -201,20 +198,13 @@ public class Game {
             totalYear++;
 
             scenarioNumbers.remove(Integer.valueOf(randomScenario));
-            System.out.println("\t\t\t┌───────────────────────────────┐");
-            System.out.println(  "\t\t\t    PRESS ENTER TO CONTINUE..");
-            System.out.println("\t\t\t└───────────────────────────────┘");
-            scanner.nextLine();
             Extra.clearScreen();
+            scanner.nextLine();
         }
 
         double totalScore = city.printEndGame(level, user, city, totalYear, life);
         PlayerManager.recordGame(playerId, totalScore);
         RankingManager.updateRanking(playerId, totalScore);
-        System.out.println("\t\t\t┌───────────────────────────────┐");
-        System.out.println(  "\t\t\t    PRESS ENTER TO CONTINUE..");
-        System.out.println("\t\t\t└───────────────────────────────┘");
-        scanner.nextLine();
         Extra.clearScreen();
     }
 }
