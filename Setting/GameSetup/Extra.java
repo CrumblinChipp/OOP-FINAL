@@ -13,7 +13,6 @@ public class Extra {
             System.in.read();
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
         }
         
         System.out.print("\033[H\033[2J");

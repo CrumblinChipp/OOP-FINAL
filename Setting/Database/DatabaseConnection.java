@@ -13,7 +13,6 @@ public class DatabaseConnection {
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return conn;
     }
