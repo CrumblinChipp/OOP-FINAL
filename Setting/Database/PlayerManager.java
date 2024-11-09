@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class PlayerManager {
     public static void addPlayer(String username, String password) {
         String sql = "INSERT INTO players (username, password) VALUES (?, ?)";
@@ -22,7 +23,7 @@ public class PlayerManager {
         }
     }
 
-        public static boolean checkCredentials(String username, String password) {
+    public static boolean checkCredentials(String username, String password) {
         String query = "SELECT * FROM players WHERE username = ? AND password = ?";
         
         try (Connection conn = DatabaseConnection.getConnection();
@@ -72,13 +73,6 @@ public class PlayerManager {
             pstmt.setInt(1, userId);
             pstmt.setDouble(2, score);
             pstmt.setString(3,LocalDate.now().toString());
-            int rowsInserted = pstmt.executeUpdate();
-            
-            if (rowsInserted > 0) {
-                System.out.println("Game record added successfully for user ID: " + userId);
-            } else {
-                System.out.println("Failed to add game record for user ID: " + userId);
-            }
             
         } catch (SQLException e) {
             System.out.println("Error recording game: " + e.getMessage());
@@ -145,7 +139,6 @@ public class PlayerManager {
             }
     
             System.out.println("└──────────────────────────────────────────────────────────────────────────────────┘");
-            Extra.clearScreen();
     
         } catch (SQLException e) {
             System.out.println("Error retrieving game records.");
@@ -196,5 +189,49 @@ public class PlayerManager {
             System.out.println("Error checking username availability: " + e.getMessage());
         }
         return false;
+    }
+
+    public static void changePassword(int userId, String newPassword) {
+        
+        String sql = "UPDATE players SET password = ? WHERE user_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newPassword);
+            pstmt.setInt(2, userId);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println(Extra.formatText("Password updated successfully."));
+            } else {
+                System.out.println("User ID not found. Password update failed.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error updating password: " + e.getMessage());
+        }
+    }
+
+    public static void clearUserRecords(int userId) {
+        String sql = "DELETE FROM game_records WHERE user_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println(Extra.formatText("Your game records are cleared successfully."));
+            } else {
+                System.out.println("No records found for the specified user.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error clearing user records: " + e.getMessage());
+        }
     }
 }

@@ -50,7 +50,7 @@ public class Main
                         String password = input.nextLine();
                         System.out.println();
                         if (PlayerManager.checkCredentials(username, password) == true){
-                            System.out.println(Extra.formatText("Login successful for user: " + username));
+                            System.out.println(Extra.formatText("!! Login successful !! " + username));
                             Extra.clearScreen();
                             Menu.first_menu(username);
                         }else{
@@ -74,7 +74,7 @@ public class Main
                         String password = input.nextLine();
                         System.out.println();
                         PlayerManager.addPlayer(username, password);
-                        System.out.println(Extra.formatText("Sign up successful " + username));
+                        System.out.println(Extra.formatText("!! Sign up successful !!" + username));
                         Extra.clearScreen();
                         Menu.first_menu(username);
                     }
