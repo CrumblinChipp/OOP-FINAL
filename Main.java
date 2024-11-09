@@ -60,9 +60,16 @@ public class Main
                     }
 
                     case 2 -> {
-                        System.out.print(Extra.centerTextWithInput("Enter Username: "));
-                        String username = input.nextLine();
-                        System.out.println();
+                        System.out.println(Extra.formatText("┌───────────────────────────────────────────────────────────────┐"));
+                        String username;
+                        while(true){
+                            System.out.print(Extra.centerTextWithInput("Enter Username: "));
+                            username = input.nextLine();
+                            System.out.println();
+                            if (PlayerManager.isUsernameTaken(username) == false){
+                                break;
+                            }
+                        }
                         System.out.print(Extra.centerTextWithInput("Enter Password: "));
                         String password = input.nextLine();
                         System.out.println();

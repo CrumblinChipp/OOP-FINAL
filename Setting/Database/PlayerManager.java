@@ -39,7 +39,7 @@ public class PlayerManager {
         }
     }
 
-    public static int getUserIdByUsername(String username) {
+    public static int getUserId(String username) {
         String query = "SELECT user_id FROM players WHERE username = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -85,8 +85,7 @@ public class PlayerManager {
         }
     }
 
-    public static void showGameRecordsByUserId(int userId, String user) {
-        // Subquery to get the best score and its date
+    public static void showGameRecords(int userId) {
         String bestScoreQuery = """
             SELECT score, date_played
             FROM game_records
@@ -94,7 +93,6 @@ public class PlayerManager {
             LIMIT 1
         """;
     
-        // Query to fetch the 10 most recent records
         String recentRecordsQuery = """
             SELECT score, date_played
             FROM game_records
@@ -156,4 +154,47 @@ public class PlayerManager {
         }
     }
     
+    public static void changeUsername(int userId, String newUsername) {
+
+        String sql = "UPDATE players SET username = ? WHERE user_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newUsername);
+            pstmt.setInt(2, userId);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println(Extra.formatText("Username updated successfully."));
+            } else {
+                System.out.println("User ID not found. Username update failed.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error updating username: " + e.getMessage());
+        }
+    }
+
+    public static boolean isUsernameTaken(String username) {
+        String sql = "SELECT COUNT(*) AS count FROM players WHERE username = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next() && rs.getInt("count") > 0) {
+
+                System.out.println(Extra.formatText("Username is already taken. Please choose a different username."));
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error checking username availability: " + e.getMessage());
+        }
+        return false;
+    }
 }

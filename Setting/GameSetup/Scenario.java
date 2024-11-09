@@ -20,9 +20,9 @@ public class Scenario {
 
         System.out.println(Extra.formatText("What should we do?"));
 
-        System.out.println(Extra.formatText("[1] Allocate full disaster relief funds    "));
+        System.out.println(Extra.formatText("[1] Allocate full disaster relief funds        "));
         System.out.println(Extra.formatText("[2] Provide limited funds for essential repairs"));
-        System.out.println(Extra.formatText("[3] Do nothing                             "));
+        System.out.println(Extra.formatText("[3] Do nothing                                 "));
     }
 
     // ENVIRONMENT
@@ -33,7 +33,7 @@ public class Scenario {
         System.out.println(Extra.formatText("What should we do?"));
 
         System.out.println(Extra.formatText("[1] Launch a strict environmental protection program"));
-        System.out.println(Extra.formatText("[2] Impose some regulations                          "));
+        System.out.println(Extra.formatText("[2] Impose some regulations                         "));
         System.out.println(Extra.formatText("[3] Do nothing                                      "));
     }
 
@@ -56,9 +56,9 @@ public class Scenario {
 
         System.out.println(Extra.formatText("What should we do?"));
 
-        System.out.println(Extra.formatText("[1] Implement a large stimulus package     "));
-        System.out.println(Extra.formatText("[2] Offer tax breaks to small businesses   "));
-        System.out.println(Extra.formatText("[3] Do nothing                             "));
+        System.out.println(Extra.formatText("[1] Implement a large stimulus package  "));
+        System.out.println(Extra.formatText("[2] Offer tax breaks to small businesses"));
+        System.out.println(Extra.formatText("[3] Do nothing                          "));
     }
 
     // EDUCATION
@@ -69,8 +69,8 @@ public class Scenario {
         System.out.println(Extra.formatText("What should we do?"));
 
         System.out.println(Extra.formatText("[1] Completely overhaul the education system"));
-        System.out.println(Extra.formatText("[2] Implement moderate reforms               "));
-        System.out.println(Extra.formatText("[3] Ignore demands                           "));
+        System.out.println(Extra.formatText("[2] Implement moderate reforms              "));
+        System.out.println(Extra.formatText("[3] Ignore demands                          "));
     }
 
 }

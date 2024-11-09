@@ -232,37 +232,30 @@ public class City {
         attributes.put("education", 0);
         attributes.put("innovation", 0);
 
-        // Define max, min changes and resistance factor
         int maxChange = 5;
         int minChange = -5;
 
-        // Apply random changes with resistance factor
         for (String key : attributes.keySet()) {
             int randomValue = (int) (Math.random() * (maxChange - minChange + 1) + minChange);
-            attributes.put(key, randomValue); // Update each attribute in the map
+            attributes.put(key, randomValue); 
         }
 
-        // Update and display each attribute
         for (Map.Entry<String, Integer> entry : attributes.entrySet()) {
             String attributeName = entry.getKey();
             int value = entry.getValue();
-            setAttribute(attributeName, getAttribute(attributeName) + value); // Apply value to each attribute
+            setAttribute(attributeName, getAttribute(attributeName) + value); 
         }
 
         System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────┐");
         System.out.println("    YEARLY ADJUSTMENT IS ACTIVE! CERTAIN AMOUNT OF POINTS WILL BE DEDUCTED OR ADDED\n \t\t\t\t FROM EACH ATTRIBUTE");
         System.out.print("\t");
-        // Initialize a StringBuilder to accumulate the attribute strings in one line
         StringBuilder attributeLine = new StringBuilder();
         for (Map.Entry<String, Integer> entry : attributes.entrySet()) {
-            // Append each attribute and its value in the desired format
             attributeLine.append(entry.getKey().toUpperCase()).append(" (").append(entry.getValue()).append(") ");
         }
         
-        // Print all attributes on one line
-        System.out.println("  " + attributeLine.toString().trim()); // Trim any trailing space
+        System.out.println("  " + attributeLine.toString().trim()); 
         
-        // Print the closing border
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
     }
 
