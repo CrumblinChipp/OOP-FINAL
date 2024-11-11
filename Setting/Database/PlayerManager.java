@@ -234,4 +234,66 @@ public class PlayerManager {
             System.out.println("Error clearing user records: " + e.getMessage());
         }
     }
+
+    public static void deleteAccount(int userId) {
+        String deleteGameRecordsSql = "DELETE FROM game_records WHERE user_id = ?";
+        String deleteRankingSql = "DELETE FROM rankings WHERE user_id = ?";
+        String deletePlayerSql = "DELETE FROM players WHERE user_id = ?";
+
+        // Declare connection outside to access it in catch block if needed
+        Connection conn = null;
+        try {
+            conn = DatabaseConnection.getConnection();
+            conn.setAutoCommit(false);  
+
+            // Delete game records
+            try (PreparedStatement pstmtGameRecords = conn.prepareStatement(deleteGameRecordsSql)) {
+                pstmtGameRecords.setInt(1, userId);
+                pstmtGameRecords.executeUpdate();
+                System.out.println("User's game records deleted successfully.");
+            }
+
+            // Delete ranking entry
+            try (PreparedStatement pstmtRanking = conn.prepareStatement(deleteRankingSql)) {
+                pstmtRanking.setInt(1, userId);
+                pstmtRanking.executeUpdate();
+                System.out.println("User's ranking entry deleted successfully.");
+            }
+
+            // Delete player account
+            try (PreparedStatement pstmtPlayer = conn.prepareStatement(deletePlayerSql)) {
+                pstmtPlayer.setInt(1, userId);
+                int rowsAffected = pstmtPlayer.executeUpdate();
+                
+                if (rowsAffected > 0) {
+                    System.out.println("User account deleted successfully.");
+                } else {
+                    System.out.println("User ID not found. Account deletion failed.");
+                }
+            }
+
+            // Commit transaction if all deletions succeeded
+            conn.commit();
+
+        } catch (SQLException e) {
+            System.out.println("Error deleting user account: " + e.getMessage());
+            try {
+                if (conn != null) {
+                    conn.rollback();  // Rollback transaction on error
+                    System.out.println("Transaction rolled back.");
+                }
+            } catch (SQLException rollbackException) {
+                System.out.println("Error during rollback: " + rollbackException.getMessage());
+            }
+        } finally {
+            // Ensure connection is closed after operation
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException closeException) {
+                    System.out.println("Error closing connection: " + closeException.getMessage());
+                }
+            }
+        }
+    }
 }

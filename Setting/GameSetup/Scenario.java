@@ -61,7 +61,7 @@ public class Scenario {
         System.out.println(Extra.formatText("[3] Do nothing                          "));
     }
 
-    // EDUCATION
+    // EDUCATION SYSTEM
     public static void scenario6() {
         Extra.centerText("The city's education system is outdated, and teachers are demanding reforms to ensure better education for children.");
         System.out.println();
@@ -73,4 +73,52 @@ public class Scenario {
         System.out.println(Extra.formatText("[3] Ignore demands                          "));
     }
 
+    //EDUCATION TECHNOLOGY
+    public static void scenario7() {
+        Extra.centerText("Schools and universities are struggling to adapt to new technologies. Students are falling behind due to lack of resources.");
+        System.out.println();
+    
+        System.out.println(Extra.formatText("What should we do?"));
+    
+        System.out.println(Extra.formatText("[1] Invest heavily in digital learning resources"));
+        System.out.println(Extra.formatText("[2] Offer scholarships for tech-focused programs"));
+        System.out.println(Extra.formatText("[3] Do nothing                                  "));
+    }
+
+    // ENVIRONMENTAL POLLUTION
+    public static void scenario8() {
+        Extra.centerText("Air and water pollution levels are rising, and citizens are experiencing health issues. Environmental groups are calling for action.");
+        System.out.println();
+    
+        System.out.println(Extra.formatText("What should we do?"));
+    
+        System.out.println(Extra.formatText("[1] Impose stricter regulations on industries        "));
+        System.out.println(Extra.formatText("[2] Launch a public cleanup and reforestation program"));
+        System.out.println(Extra.formatText("[3] Do nothing                                       "));
+    }
+    
+    // HEALTHCARE OVERCROWDING
+    public static void scenario9() {
+        Extra.centerText("Healthcare facilities are overcrowded, and there are reports of inadequate medical supplies. Citizens demand better healthcare access.");
+        System.out.println();
+    
+        System.out.println(Extra.formatText("What should we do?"));
+    
+        System.out.println(Extra.formatText("[1] Allocate funds to expand healthcare infrastructure"));
+        System.out.println(Extra.formatText("[2] Increase subsidies for essential medicines        "));
+        System.out.println(Extra.formatText("[3] Do nothing                                        "));
+    }
+   
+    //INNOVATION FESTIVAL
+    public static void scenario10() {
+        Extra.centerText("A tech giant is hosting a city-wide innovation competition, and they’ve invited the city to participate. Winning could bring major investment.");
+        System.out.println();
+    
+        System.out.println(Extra.formatText("What should we do?"));
+    
+        System.out.println(Extra.formatText("[1] Promote the competition with city funding and support.       "));
+        System.out.println(Extra.formatText("[2]Allow only local businesses to participate without city funds."));
+        System.out.println(Extra.formatText("[3] Decline the invitation.                                      "));
+    }
+    
 }

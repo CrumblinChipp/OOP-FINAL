@@ -23,11 +23,11 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\t\t\t┌───────────────────────────────────┐");
         System. out.println("""
-                                    \t\t\t\tDIFFICULTY 1
+                                    \t\t\tDIFFICULTY 1
                                 \t\t\t\t(Extra Bonus Points)\n
-                                    \t\t\t\tDIFFICULTY 2
+                                    \t\t\tDIFFICULTY 2
                             \t \t\t\t(Normal Difficulty)\n
-                                    \t\t\t\tDIFFICULTY 3
+                                    \t\t\tDIFFICULTY 3
                                 \t\t\t\t(Bonus Points Reduced)\n""");
 
         int level;
@@ -51,7 +51,7 @@ public class Game {
         Message.tutorialMessage(level);
         Extra.clearScreen();
         
-        List<Integer> scenarioNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> scenarioNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         int life = 3;
         int totalYear = 0;
         for (int year = 1 ;year <= 5 && life > 0; year++){
@@ -68,6 +68,10 @@ public class Game {
                 case 4 -> Scenario.scenario4();
                 case 5 -> Scenario.scenario5();
                 case 6 -> Scenario.scenario6();
+                case 7 -> Scenario.scenario7();
+                case 8 -> Scenario.scenario8();
+                case 9 -> Scenario.scenario9();
+                case 10 -> Scenario.scenario10();
             }
             int choice;
             while (true) {
@@ -87,111 +91,7 @@ public class Game {
                 }
             }
             System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
-            switch(randomScenario){
-                case 1 -> {
-                    switch (choice) {
-                        case 1 ->  {
-                            DecisionScenario1 DS1 = new DecisionScenario1(null);
-                            DS1.applyEffectHigh(city, level);
-                        }
-                        case 2 -> {
-                            DecisionScenario1 DS1 = new DecisionScenario1(null);
-                            DS1.applyEffectModerate(city, level);
-                        }
-                        case 3 -> {
-                            DecisionScenario1 DS1 = new DecisionScenario1(null);
-                            DS1.applyEffectNone(city, level);
-                        }
-
-                    }
-                }
-
-                case 2 -> {
-                    switch (choice) {
-                        case 1 ->  {
-                            DecisionScenario2 DS2 = new DecisionScenario2(null);
-                            DS2.applyEffectHigh(city, level);
-                        }
-                        case 2 -> {
-                            DecisionScenario2 DS2 = new DecisionScenario2(null);
-                            DS2.applyEffectModerate(city, level);
-                        }
-                        case 3 -> {
-                            DecisionScenario2 DS2 = new DecisionScenario2(null);
-                            DS2.applyEffectNone(city, level);
-                        }
-                    }
-                }
-
-                case 3 -> {
-                    switch (choice) {
-                        case 1 ->  {
-                            DecisionScenario3 DS3 = new DecisionScenario3(null);
-                            DS3.applyEffectHigh(city, level);
-                        }
-                        case 2 -> {
-                            DecisionScenario3 DS3 = new DecisionScenario3(null);
-                            DS3.applyEffectModerate(city, level);
-                        }
-                        case 3 -> {
-                            DecisionScenario3 DS3 = new DecisionScenario3(null);
-                            DS3.applyEffectNone(city, level);
-                        }
-                    }
-                }
-                case 4 -> {
-                    switch (choice) {
-                        case 1 ->  {
-                            DecisionScenario4 DS4 = new DecisionScenario4(null);
-                            DS4.applyEffectHigh(city, level);
-                        }
-                        case 2 -> {
-                            DecisionScenario4 DS4 = new DecisionScenario4(null);
-                            DS4.applyEffectModerate(city, level);
-                        }
-                        case 3 -> {
-                            DecisionScenario4 DS4 = new DecisionScenario4(null);
-                            DS4.applyEffectNone(city, level);
-                        }
-                    }
-                }
-
-                case 5 -> {
-                    switch (choice) {
-                        case 1 ->  {
-                            DecisionScenario5 DS5 = new DecisionScenario5(null);
-                            DS5.applyEffectHigh(city, level);
-                        }
-                        case 2 -> {
-                            DecisionScenario5 DS5 = new DecisionScenario5(null);
-                            DS5.applyEffectModerate(city, level);
-                        }
-                        case 3 -> {
-                            DecisionScenario5 DS5 = new DecisionScenario5(null);
-                            DS5.applyEffectNone(city, level);
-                        }
-                    }
-                }
-
-                case 6 -> {
-                    switch (choice) {
-                        case 1 ->  {
-                            DecisionScenario6 DS6 = new DecisionScenario6(null);
-                            DS6.applyEffectHigh(city, level);
-                        }
-                        case 2 -> {
-                            DecisionScenario6 DS6 = new DecisionScenario6(null);
-                            DS6.applyEffectModerate(city, level);
-                        }
-                        case 3 -> {
-                            DecisionScenario6 DS6 = new DecisionScenario6(null);
-                            DS6.applyEffectNone(city, level);
-                        }
-                    }
-                }
-
-            }
-
+            Decision.applyDecision(randomScenario, choice, city, level);
             city.pointBonusAllocation(level);
             city.decayEffect(level);
             life -= city.criticalSectorChecker(level);

@@ -30,7 +30,7 @@ public class City {
     }
 
     ///bar creation
-    public static String generateProgressBar(int length, int percent) {
+    private static String generateProgressBar(int length, int percent) {
         char incomplete = '░';
         char complete = '█';
 

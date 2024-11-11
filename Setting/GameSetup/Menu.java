@@ -48,11 +48,11 @@ public class Menu {
                         while (true) {
                             System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────┐");
                             System.out.println(Extra.formatText("SETTING\n"));
-                            System.out.println(Extra.formatText("[1] Change Username   "));
-                            System.out.println(Extra.formatText("[2] Change Password   "));
-                            System.out.println(Extra.formatText("[3] Clear Game Record "));
-                            System.out.println(Extra.formatText("[4] Delete Account    "));
-                            System.out.println(Extra.formatText("[5] Return            "));
+                            System.out.println(Extra.formatText("[1] Change Username  "));
+                            System.out.println(Extra.formatText("[2] Change Password  "));
+                            System.out.println(Extra.formatText("[3] Clear Game Record"));
+                            System.out.println(Extra.formatText("[4] Delete Account   "));
+                            System.out.println(Extra.formatText("[5] Return           "));
                             System.out.print(Extra.centerTextWithInput(" Action(1-5): "));
                             try {
                                 settingAction = scanner.nextInt();
@@ -79,7 +79,6 @@ public class Menu {
                                     if (PlayerManager.isUsernameTaken(newUsername) == false){
                                         break;
                                     }
-                                    
                                 }
                                 System.out.println(Extra.formatText("└───────────────────────────────────────────────────────┘"));
 
@@ -92,10 +91,9 @@ public class Menu {
                                     PlayerManager.changeUsername(playerId, newUsername);
                                     Extra.clearScreen();
                                 }else {
-                                    System.out.println(Extra.formatText("CHANGES ARE UNSAVED"));
+                                    System.out.println(Extra.formatText("CHANGES ARE NOT SAVED"));
                                     Extra.clearScreen();
                                 }
-
                             }
                             case 2 -> {
                                 
@@ -119,7 +117,7 @@ public class Menu {
                                             PlayerManager.changePassword(playerId, newPassword);
                                             Extra.clearScreen();
                                         }else {
-                                            System.out.println(Extra.formatText("CHANGES ARE UNSAVED"));
+                                            System.out.println(Extra.formatText("CHANGES ARE NOT SAVED"));
                                             Extra.clearScreen();
                                         }
                                         break;
@@ -137,6 +135,7 @@ public class Menu {
                                 System.out.println(Extra.formatText("You are about to delete your game record!"));
                                 System.out.println(Extra.formatText("[1] This will CLEAR the records of your game"));
                                 System.out.println(Extra.formatText("[2] This will NOT affect your ranking       "));
+                                System.out.println(Extra.formatText("! ! ! ! WARNING ! ! ! !"));
                                 System.out.println(Extra.formatText("└───────────────────────────────────────────────────────┘"));
                                 System.out.println(Extra.formatText("┌───────────────────────────────────────────────────────┐"));
                                 System.out.println(Extra.formatText("TYPE \"CONFIRM\" TO PROCEED WITH THE CHANGES"));
@@ -147,7 +146,7 @@ public class Menu {
                                     PlayerManager.clearUserRecords(playerId);
                                     Extra.clearScreen();
                                 }else {
-                                    System.out.println(Extra.formatText("CHANGES ARE UNSAVED"));
+                                    System.out.println(Extra.formatText("CHANGES ARE NOT SAVED"));
                                     Extra.clearScreen();
                                 }
                             }
