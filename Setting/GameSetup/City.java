@@ -30,7 +30,7 @@ public class City {
     }
 
     ///bar creation
-    private static String generateProgressBar(int length, int percent) {
+    private static String generateProgressBar( int percent) {
         char incomplete = '░';
         char complete = '█';
 
@@ -41,8 +41,8 @@ public class City {
         }
 
         StringBuilder builder = new StringBuilder();
-        Stream.generate(() -> incomplete).limit(length).forEach(builder::append);
-        int steps = (percent * length) / 100;
+        Stream.generate(() -> incomplete).limit(30).forEach(builder::append);
+        int steps = (percent * 30) / 100;
         for (int i = 0; i < steps; i++) {
             builder.replace(i, i + 1, String.valueOf(complete));
         }
@@ -260,9 +260,8 @@ public class City {
     }
 
     ///to display status of city per year loop
-    public void printStatus(int length, String user, int year, int life) {
+    public void printStatus( String user, int year, int life) {
 
-        // Get the attribute values
         int healthcare = getAttribute("healthcare");
         int morale = getAttribute("morale");
         int environment = getAttribute("environment");
@@ -270,21 +269,19 @@ public class City {
         int education = getAttribute("education");
         int innovation = getAttribute("innovation");
 
-        // Generate progress bars
-        String healthBar = generateProgressBar(length, healthcare);
-        String enviBar = generateProgressBar(length, environment);
-        String fundBar = generateProgressBar(length, fund);
-        String educationBar = generateProgressBar(length, education);
-        String innovationBar = generateProgressBar(length, innovation);
+        String healthBar = generateProgressBar( healthcare);
+        String enviBar = generateProgressBar( environment);
+        String fundBar = generateProgressBar( fund);
+        String educationBar = generateProgressBar( education);
+        String innovationBar = generateProgressBar( innovation);
 
         String heart = "O ";
         StringBuilder hearts = new StringBuilder();
         for (int i = 0; i < life; i++) {
             hearts.append(heart);
         }
-        // Print the status
         System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────┐");
-        System.out.println(  "  Life: "+hearts+"\t  \t\t!!!Rockwell City!!!\n\n\tPlayer: " + user + "\t\t\tYear:" + year + "\t\t\tMorale: " + determineStatus(morale) + "\n");
+        System.out.println(  "  Life: "+hearts+"\t  \t\t! ! !"+user+"\'s City! ! !\n\n\tPlayer: " + user + "\t\t\tYear:" + year + "\t\t\tMorale: " + determineStatus(morale) + "\n");
         System.out.println(" ────────────────────────────────────────────────────────────────────────────────────");
         System.out.println(String.format("\t\t\t   %-20s %-23s ", "FUNDS", determineStatus(fund)));
         System.out.println(String.format("\t\t\t   %-44s \n", fundBar));
@@ -335,7 +332,7 @@ public class City {
             hearts.append(heart);
         }
         System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────┐");
-        System.out.println("\t\t\t\t!!!Rockwell City!!!\n\n\tPlayer: " + user + "\t\tYears: "+years+"\t\t Life: "+hearts+"\n");
+        System.out.println("\t\t\t\t!!!"+user+"\'s City!!!\n\n\tPlayer: " + user + "\t\tYears: "+years+"\t\t Life: "+hearts+"\n");
         System.out.println(" ────────────────────────────────────────────────────────────────────────────────────");
         System.err.println("\t\t\t\t      SCORE");
 
@@ -350,9 +347,13 @@ public class City {
 
         String innovationDashes = new String(new char[totalLength - "INNOVATION".length() - 1]).replace("\0", "-");
         System.out.println(String.format("\t\tINNOVATION %s %d", innovationDashes, innovation));
+        String moraleDashes = new String(new char[totalLength - "MORALE MULTIPLIER".length() - 1]).replace("\0", "-");
+        System.out.println(String.format("\t\tMORALE MULTIPLIER %s x%.2f", moraleDashes, moraleMultiplier));
         double achievementBonus = (Message.achievementBonus(level, city, attributeScore));
         double totalScore = (attributeScore + achievementBonus)*levelMultiplier;
-        System.out.println("");
+        String levelDashes = new String(new char[totalLength - "LEVEL MULTIPLIER".length() - 1]).replace("\0", "-");
+        System.out.println(String.format("\t\tLEVEL MULTIPLIER %s x%.2f", levelDashes, levelMultiplier));
+        System.out.println();
         System.out.println("\t_________________________________________________________________");
         String totalDashes = new String(new char[totalLength - "TOTAL".length() - 1]).replace("\0", "-");
         System.out.println(String.format("\t\tTOTAL %s %.2f", totalDashes, totalScore));

@@ -50,7 +50,7 @@ public class Message {
 
     }
 
-  private static void printAchievement(String title, int totalLength, int value) {
+  public static void printAchievement(String title, int totalLength, int value) {
     int dashCount = totalLength - title.length() - String.valueOf(value).length() - 1;
     String dashes = "-".repeat(Math.max(0, dashCount));
     System.out.println(String.format("\t\t%s %s %d", title, dashes, value));
@@ -169,13 +169,6 @@ public class Message {
         totalBonus += 75;
     }
 
-    if (city.getAttribute("innovation") >= 80 && (city.getAttribute("innovation") >= city.getAttribute("environment")&&
-        city.getAttribute("innovation") >= city.getAttribute("healthcare")&& 
-        city.getAttribute("innovation") >= city.getAttribute("education"))) {
-        printAchievement("CITY OF THE FUTURE", totalLength, 75);
-        totalBonus += 75;
-    } 
-
     if (city.getAttribute("healthcare") >= 80 && (city.getAttribute("healthcare") >= city.getAttribute("environment")&&
         city.getAttribute("healthcare") >= city.getAttribute("innovation")&& 
         city.getAttribute("healthcare") >= city.getAttribute("education"))) {
@@ -216,5 +209,22 @@ public class Message {
     return totalBonus;
   }
 
+
+  public static void deleteAccountMessage() {
+    System.out.println("┌──────────────────────────────────────────────────────────────────────────┐");
+    System.out.println("│                                                                          │");
+    System.out.println("│  Thank you for playing City Simulator!                                   │");
+    System.out.println("│                                                                          │");
+    System.out.println("│  You've faced many tough decisions in guiding your city towards growth,  │");
+    System.out.println("│  innovation, and sustainability. Each choice impacted the lives of       │");
+    System.out.println("│  countless citizens, shaping the future of your city in unique ways.     │");
+    System.out.println("│                                                                          │");
+    System.out.println("│  Remember, leading a city is about balance and foresight. The challenges │");
+    System.out.println("│  may change, but your decisions and values make the difference.          │");
+    System.out.println("│                                                                          │");
+    System.out.println("│  We hope you enjoyed the journey. Farewell, Mayor!                       │");
+    System.out.println("│                                                                          │");
+    System.out.println("└──────────────────────────────────────────────────────────────────────────┘"); 
+    }
 
 }

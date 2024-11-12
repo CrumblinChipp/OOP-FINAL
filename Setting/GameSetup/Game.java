@@ -10,7 +10,8 @@ import java.util.*;
 public class Game {
 
     public static void GameRun(String user, int playerId){
-
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
         Random random =new Random();
         int randomHealth = random.nextInt(40) + 25;
         int randomEdu = random.nextInt(40) + 25;   
@@ -20,7 +21,7 @@ public class Game {
         int randomMoral = random.nextInt(45) + 30;
 
         City city = new City(randomHealth, randomEdu, randomInfra, randomEnvi, randomFund, randomMoral);
-        Scanner scanner = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("\t\t\t┌───────────────────────────────────┐");
         System. out.println("""
                                     \t\t\tDIFFICULTY 1
@@ -34,8 +35,8 @@ public class Game {
         while (true) {
             System.out.print("\t\t\tPlease enter your choice (1, 2, or 3):");
             try {
-                level = scanner.nextInt();
-                scanner.nextLine(); 
+                level = input.nextInt();
+                input.nextLine(); 
 
                 if (level >= 1 && level <= 3) {
                     break;
@@ -44,7 +45,7 @@ public class Game {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("\t\t\tInvalid input. Please enter a number (1, 2, or 3).");
-                scanner.nextLine(); 
+                input.nextLine(); 
             }
         }
 
@@ -59,7 +60,7 @@ public class Game {
             int randomIndex = random.nextInt(scenarioList.size());
             final int randomScenario = scenarioList.get(randomIndex);
 
-            city.printStatus(30, user, year, life);
+            city.printStatus( user, year, life);
 
             switch (randomScenario){
                 case 1 -> Scenario.scenario1();
@@ -77,8 +78,8 @@ public class Game {
             while (true) {
                 System.out.print("\t\tPlease enter your choice (1, 2, or 3):");
                 try {
-                    choice = scanner.nextInt();
-                    scanner.nextLine(); 
+                    choice = input.nextInt();
+                    input.nextLine(); 
         
                     if (choice >= 1 && choice <= 3) {
                         break;
@@ -87,7 +88,7 @@ public class Game {
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("\t\tInvalid input. Please enter a number (1, 2, or 3).");
-                    scanner.nextLine(); 
+                    input.nextLine(); 
                 }
             }
             System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
@@ -99,12 +100,13 @@ public class Game {
 
             scenarioNumbers.remove(Integer.valueOf(randomScenario));
             Extra.clearScreen();
-            scanner.nextLine();
+            input.nextLine();
         }
 
         double totalScore = city.printEndGame(level, user, city, totalYear, life);
         PlayerManager.recordGame(playerId, totalScore);
         RankingManager.updateRanking(playerId, totalScore);
+    
         Extra.clearScreen();
     }
 }

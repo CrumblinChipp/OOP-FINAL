@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RankingManager {
     public static void updateRanking(int userId, double score) {
@@ -42,45 +44,44 @@ public class RankingManager {
             ORDER BY best_score DESC
             LIMIT 10;
         """;
-    
+
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
-    
+
+            // Collect results into a list for flexible display
+            List<String> topRankings = new ArrayList<>();
+
+            while (rs.next()) {
+                String username = rs.getString("username");
+                int bestScore = rs.getInt("best_score");
+                topRankings.add(String.format("%-4d       \t\t\t%-10s", bestScore, username));
+            }
+
             // Print the header
             System.out.println("┌──────────────────────────────────────────────────────────────────────────────────┐");
             System.out.println("                                    Rankings                                      ");
             System.out.println("\n\t\t\tScore          |               Player               ");
             System.out.println("     ________________________________________________________________________");
-    
-            // Track ranking
-            int rank = 1;
-    
+
             // Display top 3 players
-            while (rs.next() && rank <= 3) {
-                String username = rs.getString("username");
-                int bestScore = rs.getInt("best_score");
-                System.out.printf("\tTop %-2d:          %-4d       \t\t\t%-10s%n", rank, bestScore, username);
-                rank++;
+            for (int i = 0; i < topRankings.size() && i < 3; i++) {
+                System.out.printf("\tTop %-2d:          %s%n", i + 1, topRankings.get(i));
             }
-    
-            // Fill in the rest up to 10 players, ensuring no duplicates
-            while (rs.next() && rank <= 10) {
-                String username = rs.getString("username");
-                int bestScore = rs.getInt("best_score");
-                System.out.printf("\t [%-2d]         %-4d          \t\t\t%-10s%n", rank, bestScore, username);
-                rank++;
+
+            // Display the next 7 players if available
+            for (int i = 3; i < topRankings.size() && i < 10; i++) {
+                System.out.printf("\t [%-2d]            %s%n", i + 1, topRankings.get(i));
             }
-    
-            // If fewer than 10 players exist, fill in the blanks
-            while (rank <= 10) {
-                System.out.printf("\t [%-2d]         %-4s            %-10s%n", rank, "", "");
-                rank++;
+
+            // Fill in blanks if fewer than 10 players exist
+            for (int i = topRankings.size(); i < 10; i++) {
+                System.out.printf("\t [%-2d]         %-4s            %-10s%n", i + 1, "", "");
             }
-    
+
             System.out.println("└──────────────────────────────────────────────────────────────────────────────────┘");
             Extra.clearScreen();
-    
+
         } catch (SQLException e) {
             System.out.println("Error retrieving rankings.");
             e.printStackTrace();
@@ -89,5 +90,4 @@ public class RankingManager {
             e.printStackTrace();
         }
     }
-    
 }

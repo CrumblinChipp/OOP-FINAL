@@ -1,5 +1,6 @@
 package GameSetup;
 
+import Database.DatabaseSetup;
 import Database.PlayerManager;
 import Database.RankingManager;
 import java.util.InputMismatchException;
@@ -29,6 +30,7 @@ public class Menu {
                         scanner.nextLine();
    
                         if (action >= 1 && action <= 5) {
+                            System.out.println("└──────────────────────────────────────────────────────────────────────────────────┘");
                             break; 
                         } else {
                             System.out.println(Extra.formatText("Invalid input. Please enter 1-5."));
@@ -129,6 +131,8 @@ public class Menu {
                                 }
                             }    
                             case 3 -> {
+                                System.out.print("\033[H\033[2J");
+                                System.out.flush();
                                 PlayerManager.showGameRecords(playerId);
                                 System.out.println(Extra.formatText("┌───────────────────────────────────────────────────────┐"));
                                 System.out.println(Extra.formatText("! ! ! ! WARNING ! ! ! !"));
@@ -143,7 +147,8 @@ public class Menu {
                                 String confirm = scanner.nextLine();
                                 System.out.println(Extra.formatText("└───────────────────────────────────────────────────────┘"));
                                 if ("CONFIRM".equals(confirm)){
-                                    PlayerManager.clearUserRecords(playerId);
+                                    PlayerManager.clearGameRecords(playerId);
+                                    DatabaseSetup.createGameRecordsTable();
                                     Extra.clearScreen();
                                 }else {
                                     System.out.println(Extra.formatText("CHANGES ARE NOT SAVED"));
@@ -151,12 +156,39 @@ public class Menu {
                                 }
                             }
                             case 4 ->{
-                                System.out.println("Delete account");
-                            }
+                                System.out.print("\033[H\033[2J");
+                                System.out.flush();
+                                PlayerManager.showGameRecords(playerId);
+                                System.out.println(Extra.formatText("┌───────────────────────────────────────────────────────┐"));
+                                System.out.println(Extra.formatText("! ! ! ! WARNING ! ! ! !"));
+                                System.out.println(Extra.formatText("You are about to delete your ACCOUNT!"));
+                                System.out.println(Extra.formatText("[1] This will CLEAR the records of your game          "));
+                                System.out.println(Extra.formatText("[2] This will REMOVE you from the ranking             "));
+                                System.out.println(Extra.formatText("[3] You WON'T be able to log in again after proceeding"));
+                                System.out.println(Extra.formatText("! ! ! ! WARNING ! ! ! !"));
+                                System.out.println(Extra.formatText("└───────────────────────────────────────────────────────┘"));
+                                System.out.println(Extra.formatText("┌───────────────────────────────────────────────────────┐"));
+                                System.out.println(Extra.formatText("TYPE \"DELETE ACCOUNT\" TO PROCEED WITH THE CHANGES"));
+                                System.out.print(Extra.centerTextWithInput("Text: "));
+                                String confirm = scanner.nextLine();
+                                System.out.println(Extra.formatText("└───────────────────────────────────────────────────────┘"));
+                                if ("DELETE ACCOUNT".equals(confirm)){
+                                    PlayerManager.deleteAccount(playerId);
+                                    Message.deleteAccountMessage();
+                                    System.exit(0);
+                                }else {
+                                    System.out.println(Extra.formatText("CHANGES ARE NOT SAVED"));
+                                    Extra.clearScreen();
+                                }                            }
                             case 5 -> Extra.clearScreen();
                         }
                     }
-                    case 5 -> System.exit(action);
+                    case 5 -> {
+                        Extra.centerText("EXITING -- THANK YOU FOR PLAYING OUR CITY SIMULATOR");
+                        System.out.println("└──────────────────────────────────────────────────────────────────────────────────┘");
+
+                        System.exit(0);
+                    }
                 }
             }
         }

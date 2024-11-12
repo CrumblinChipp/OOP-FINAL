@@ -73,7 +73,8 @@ public class PlayerManager {
             pstmt.setInt(1, userId);
             pstmt.setDouble(2, score);
             pstmt.setString(3,LocalDate.now().toString());
-            
+            pstmt.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println("Error recording game: " + e.getMessage());
         }
@@ -214,26 +215,26 @@ public class PlayerManager {
         }
     }
 
-    public static void clearUserRecords(int userId) {
-        String sql = "DELETE FROM game_records WHERE user_id = ?";
-
+    public static void clearGameRecords(int userId) {
+        String deleteGameRecordsSql = "DELETE FROM game_records WHERE user_id = ?";
+    
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
+             PreparedStatement pstmt = conn.prepareStatement(deleteGameRecordsSql)) {
+    
             pstmt.setInt(1, userId);
-
-            int rowsAffected = pstmt.executeUpdate();
-
-            if (rowsAffected > 0) {
-                System.out.println(Extra.formatText("Your game records are cleared successfully."));
+            int rowsDeleted = pstmt.executeUpdate();
+    
+            if (rowsDeleted > 0) {
+                System.out.println("Game records for user deleted successfully.");
             } else {
-                System.out.println("No records found for the specified user.");
+                System.out.println("No game records found for the user.");
             }
-
+    
         } catch (SQLException e) {
-            System.out.println("Error clearing user records: " + e.getMessage());
+            System.out.println("Error clearing game records: " + e.getMessage());
         }
     }
+    
 
     public static void deleteAccount(int userId) {
         String deleteGameRecordsSql = "DELETE FROM game_records WHERE user_id = ?";
