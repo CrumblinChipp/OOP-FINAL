@@ -450,7 +450,7 @@ class DecisionScenario10 extends Decision {
 
     @Override
     public void applyEffectModerate(City city, int level) {
-        pointAllocation(level, 2, city, "innovation");
+        pointAllocation(level, 2, city, "innovation", "morale");
         Extra.centerText("Private sponsorship helps fund the tech festival, supporting innovation.");
         System.out.println(Extra.formatText("(+)INNOVATION    (-)FUND"));
     }
