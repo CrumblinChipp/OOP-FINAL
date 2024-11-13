@@ -52,7 +52,7 @@ public class Main
                         if (PlayerManager.checkCredentials(username, password) == true){
                             System.out.println(Extra.formatText("!! Login successful !! "));
                             Extra.clearScreen();
-                            Menu.first_menu(username);
+                            Menu.firstMenu(username);
                         }else{
                             System.out.println(Extra.formatText("Login Failed"));
                             Extra.clearScreen();
@@ -74,9 +74,9 @@ public class Main
                         String password = input.nextLine();
                         System.out.println();
                         PlayerManager.addPlayer(username, password);
-                        System.out.println(Extra.formatText("!! Sign up successful !!" + username));
+                        System.out.println(Extra.formatText("!! Sign up successful !!"));
                         Extra.clearScreen();
-                        Menu.first_menu(username);
+                        Menu.firstMenu(username);
                     }
                 }
             }

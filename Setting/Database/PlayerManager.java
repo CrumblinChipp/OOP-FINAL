@@ -98,7 +98,6 @@ public class PlayerManager {
     
         try (Connection conn = DatabaseConnection.getConnection()) {
             
-            // Get best score and its date
             String bestScoreDate = "";
             int bestScore = 0;
             try (PreparedStatement bestScoreStmt = conn.prepareStatement(bestScoreQuery)) {
@@ -111,7 +110,6 @@ public class PlayerManager {
                 }
             }
     
-            // Get the 10 most recent game records
             List<String> records = new ArrayList<>();
             try (PreparedStatement recentStmt = conn.prepareStatement(recentRecordsQuery)) {
                 recentStmt.setInt(1, userId);
@@ -124,7 +122,6 @@ public class PlayerManager {
                 }
             }
     
-            // Display formatted output
             System.out.println("┌──────────────────────────────────────────────────────────────────────────────────┐");
             System.out.println("                                    Game Records                                  ");
             System.out.println("\n\t\t\tScore            |          \tDate Played         \n")  ;
@@ -235,26 +232,22 @@ public class PlayerManager {
         }
     }
     
-
     public static void deleteAccount(int userId) {
         String deleteGameRecordsSql = "DELETE FROM game_records WHERE user_id = ?";
         String deleteRankingSql = "DELETE FROM rankings WHERE user_id = ?";
         String deletePlayerSql = "DELETE FROM players WHERE user_id = ?";
 
-        // Declare connection outside to access it in catch block if needed
         Connection conn = null;
         try {
             conn = DatabaseConnection.getConnection();
             conn.setAutoCommit(false);  
 
-            // Delete game records
             try (PreparedStatement pstmtGameRecords = conn.prepareStatement(deleteGameRecordsSql)) {
                 pstmtGameRecords.setInt(1, userId);
                 pstmtGameRecords.executeUpdate();
                 System.out.println("User's game records deleted successfully.");
             }
 
-            // Delete ranking entry
             try (PreparedStatement pstmtRanking = conn.prepareStatement(deleteRankingSql)) {
                 pstmtRanking.setInt(1, userId);
                 pstmtRanking.executeUpdate();
@@ -273,21 +266,19 @@ public class PlayerManager {
                 }
             }
 
-            // Commit transaction if all deletions succeeded
             conn.commit();
 
         } catch (SQLException e) {
             System.out.println("Error deleting user account: " + e.getMessage());
             try {
                 if (conn != null) {
-                    conn.rollback();  // Rollback transaction on error
+                    conn.rollback(); 
                     System.out.println("Transaction rolled back.");
                 }
             } catch (SQLException rollbackException) {
                 System.out.println("Error during rollback: " + rollbackException.getMessage());
             }
         } finally {
-            // Ensure connection is closed after operation
             if (conn != null) {
                 try {
                     conn.close();

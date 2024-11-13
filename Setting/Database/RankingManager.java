@@ -29,7 +29,6 @@ public class RankingManager {
             pstmt.setBigDecimal(3, roundedScore);
             pstmt.executeUpdate();
             
-            System.out.println("Ranking updated successfully.");
         } catch (SQLException e) {
             System.out.println("Error updating ranking: " + e.getMessage());
         }

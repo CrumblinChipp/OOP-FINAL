@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public static void first_menu(String user) {
+    public static void firstMenu(String user) {
         int playerId = PlayerManager.getUserId(user);
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
@@ -60,7 +60,7 @@ public class Menu {
                                 settingAction = scanner.nextInt();
                                 scanner.nextLine();
         
-                                if (settingAction >= 1 && settingAction <= 4) {
+                                if (settingAction >= 1 && settingAction <= 5) {
                                     break; 
                                 } else {
                                     System.out.println(Extra.formatText("Invalid input. Please enter 1-5"));
@@ -91,14 +91,12 @@ public class Menu {
                                 System.out.println(Extra.formatText("└───────────────────────────────────────────────────────┘"));
                                 if ("CONFIRM".equals(confirm)){
                                     PlayerManager.changeUsername(playerId, newUsername);
-                                    Extra.clearScreen();
                                 }else {
                                     System.out.println(Extra.formatText("CHANGES ARE NOT SAVED"));
-                                    Extra.clearScreen();
                                 }
+                                Extra.clearScreen();
                             }
                             case 2 -> {
-                                
                                 String oldPassword;
                                 String newPassword;
                                 while(true){
@@ -109,7 +107,6 @@ public class Menu {
                                     newPassword = scanner.nextLine();                                    
                                     if (PlayerManager.checkCredentials(user, oldPassword) == true){
                                         System.out.println(Extra.formatText("└───────────────────────────────────────────────────────┘"));
-
                                         System.out.println(Extra.formatText("┌───────────────────────────────────────────────────────┐"));
                                         System.out.println(Extra.formatText("TYPE \"CONFIRM\" TO PROCEED WITH THE CHANGES"));
                                         System.out.print(Extra.centerTextWithInput("Text: "));
@@ -117,17 +114,14 @@ public class Menu {
                                         System.out.println(Extra.formatText("└───────────────────────────────────────────────────────┘"));
                                         if ("CONFIRM".equals(confirm)){
                                             PlayerManager.changePassword(playerId, newPassword);
-                                            Extra.clearScreen();
                                         }else {
                                             System.out.println(Extra.formatText("CHANGES ARE NOT SAVED"));
-                                            Extra.clearScreen();
                                         }
-                                        break;
                                     }else{
                                         System.out.println(Extra.formatText("Old password was not correct"));
-                                        Extra.clearScreen();
-                                        break;
                                     }
+                                    Extra.clearScreen();
+                                    break;
                                 }
                             }    
                             case 3 -> {
@@ -135,10 +129,10 @@ public class Menu {
                                 System.out.flush();
                                 PlayerManager.showGameRecords(playerId);
                                 System.out.println(Extra.formatText("┌───────────────────────────────────────────────────────┐"));
-                                System.out.println(Extra.formatText("! ! ! ! WARNING ! ! ! !"));
+                                System.out.println(Extra.formatText("! ! ! ! WARNING ! ! ! !\n"));
                                 System.out.println(Extra.formatText("You are about to delete your game record!"));
                                 System.out.println(Extra.formatText("[1] This will CLEAR the records of your game"));
-                                System.out.println(Extra.formatText("[2] This will NOT affect your ranking       "));
+                                System.out.println(Extra.formatText("[2] This will NOT affect your ranking       \n"));
                                 System.out.println(Extra.formatText("! ! ! ! WARNING ! ! ! !"));
                                 System.out.println(Extra.formatText("└───────────────────────────────────────────────────────┘"));
                                 System.out.println(Extra.formatText("┌───────────────────────────────────────────────────────┐"));
@@ -149,22 +143,21 @@ public class Menu {
                                 if ("CONFIRM".equals(confirm)){
                                     PlayerManager.clearGameRecords(playerId);
                                     DatabaseSetup.createGameRecordsTable();
-                                    Extra.clearScreen();
                                 }else {
                                     System.out.println(Extra.formatText("CHANGES ARE NOT SAVED"));
-                                    Extra.clearScreen();
                                 }
+                                Extra.clearScreen();
                             }
                             case 4 ->{
                                 System.out.print("\033[H\033[2J");
                                 System.out.flush();
                                 PlayerManager.showGameRecords(playerId);
                                 System.out.println(Extra.formatText("┌───────────────────────────────────────────────────────┐"));
-                                System.out.println(Extra.formatText("! ! ! ! WARNING ! ! ! !"));
+                                System.out.println(Extra.formatText("! ! ! ! WARNING ! ! ! !\n"));
                                 System.out.println(Extra.formatText("You are about to delete your ACCOUNT!"));
                                 System.out.println(Extra.formatText("[1] This will CLEAR the records of your game          "));
                                 System.out.println(Extra.formatText("[2] This will REMOVE you from the ranking             "));
-                                System.out.println(Extra.formatText("[3] You WON'T be able to log in again after proceeding"));
+                                System.out.println(Extra.formatText("[3] You WON'T be able to log in again after proceeding\n"));
                                 System.out.println(Extra.formatText("! ! ! ! WARNING ! ! ! !"));
                                 System.out.println(Extra.formatText("└───────────────────────────────────────────────────────┘"));
                                 System.out.println(Extra.formatText("┌───────────────────────────────────────────────────────┐"));
@@ -179,7 +172,8 @@ public class Menu {
                                 }else {
                                     System.out.println(Extra.formatText("CHANGES ARE NOT SAVED"));
                                     Extra.clearScreen();
-                                }                            }
+                                }                            
+                            }
                             case 5 -> Extra.clearScreen();
                         }
                     }

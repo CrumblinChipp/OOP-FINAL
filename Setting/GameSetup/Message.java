@@ -50,7 +50,7 @@ public class Message {
 
     }
 
-  public static void printAchievement(String title, int totalLength, int value) {
+  private static void printAchievement(String title, int totalLength, int value) {
     int dashCount = totalLength - title.length() - String.valueOf(value).length() - 1;
     String dashes = "-".repeat(Math.max(0, dashCount));
     System.out.println(String.format("\t\t%s %s %d", title, dashes, value));
@@ -208,7 +208,6 @@ public class Message {
 
     return totalBonus;
   }
-
 
   public static void deleteAccountMessage() {
     System.out.println("┌──────────────────────────────────────────────────────────────────────────┐");

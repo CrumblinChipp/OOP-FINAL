@@ -3,5 +3,9 @@
         "lib/**/*.jar",
         "c:\\Users\\MARCELO\\Desktop\\RASEL\\mysql-connector-j-9.1.0\\mysql-connector-j-9.1.0\\mysql-connector-j-9.1.0.jar"
     ],
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "cSpell.words": [
+        "Envi",
+        "pstmt"
+    ]
 }
