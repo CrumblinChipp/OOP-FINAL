@@ -15,7 +15,7 @@ public class DatabaseSetup {
             """;
 
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement()) {
+            Statement stmt = conn.createStatement()) {
             stmt.execute(createPlayerTable);
             System.out.println("Player table created successfully.");
         } catch (SQLException e) {
@@ -36,7 +36,7 @@ public class DatabaseSetup {
             """;
     
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement()) {
+            Statement stmt = conn.createStatement()) {
             stmt.execute(createGameRecordsTable);
             System.out.println("Game records table created successfully with unique player records.");
         } catch (SQLException e) {
@@ -55,7 +55,7 @@ public class DatabaseSetup {
             """;
 
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement()) {
+            Statement stmt = conn.createStatement()) {
             stmt.execute(createRankingsTable);
             System.out.println("Rankings table created successfully.");
         } catch (SQLException e) {

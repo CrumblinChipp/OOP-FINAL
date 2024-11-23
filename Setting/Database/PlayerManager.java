@@ -68,7 +68,7 @@ public class PlayerManager {
             VALUES (?, ?, ?);
             """;
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(insertGameRecord)) {
+            PreparedStatement pstmt = conn.prepareStatement(insertGameRecord)) {
             
             pstmt.setInt(1, userId);
             pstmt.setDouble(2, score);

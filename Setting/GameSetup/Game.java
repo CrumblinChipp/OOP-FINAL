@@ -14,21 +14,23 @@ public class Game {
         System.out.flush();
         Random random =new Random();
         int randomHealth = random.nextInt(40) + 25;
-        int randomEdu = random.nextInt(40) + 25;   
+        int randomEdu = random.nextInt(40) + 25;
         int randomInfra = random.nextInt(40) + 25;
-        int randomEnvi = random.nextInt(40) + 25; 
-        int randomFund = random.nextInt(45) + 30;  
+        int randomEnvi = random.nextInt(40) + 25;
+        int randomFund = random.nextInt(45) + 30;
         int randomMoral = random.nextInt(45) + 30;
 
         City city = new City(randomHealth, randomEdu, randomInfra, randomEnvi, randomFund, randomMoral);
+        CityUI cityUI = new CityUI(city);
+
         Scanner input = new Scanner(System.in);
         System.out.println("\t\t\t┌───────────────────────────────────┐");
         System. out.println("""
-                                    \t\t\tDIFFICULTY 1
+                                    \t\t\tDIFFICULTY [1]
                                 \t\t\t\t(Extra Bonus Points)\n
-                                    \t\t\tDIFFICULTY 2
+                                    \t\t\tDIFFICULTY [2]
                             \t \t\t\t(Normal Difficulty)\n
-                                    \t\t\tDIFFICULTY 3
+                                    \t\t\tDIFFICULTY [3]
                                 \t\t\t\t(Bonus Points Reduced)\n""");
 
         int level;
@@ -60,7 +62,7 @@ public class Game {
             int randomIndex = random.nextInt(scenarioList.size());
             final int randomScenario = scenarioList.get(randomIndex);
 
-            city.printStatus( user, year, life);
+            cityUI.printStatus( user, year, life);
 
             switch (randomScenario){
                 case 1 -> Scenario.scenario1();
@@ -91,22 +93,22 @@ public class Game {
                     input.nextLine(); 
                 }
             }
-            System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
-            Decision.applyDecision(randomScenario, choice, city, level);
-            city.pointBonusAllocation(level);
-            city.decayEffect(level);
-            life -= city.criticalSectorChecker(level);
-            totalYear++;
+        System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
+        Decision.applyDecision(randomScenario, choice, city, level);
+        city.pointBonusAllocation(level);
+        city.decayEffect(level);
+        life -= city.criticalSectorChecker(level);
+        totalYear++;
 
-            scenarioNumbers.remove(Integer.valueOf(randomScenario));
-            Extra.clearScreen();
-            input.nextLine();
+        scenarioNumbers.remove(Integer.valueOf(randomScenario));
+        Extra.clearScreen();
+        input.nextLine();
         }
 
-        double totalScore = city.printEndGame(level, user, city, totalYear, life);
+        double totalScore = cityUI.printEndGame(level, user, city, totalYear, life);
         PlayerManager.recordGame(playerId, totalScore);
         RankingManager.updateRanking(playerId, totalScore);
-    
+
         Extra.clearScreen();
     }
 }

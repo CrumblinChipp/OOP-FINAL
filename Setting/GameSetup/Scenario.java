@@ -108,7 +108,7 @@ public class Scenario {
         System.out.println(Extra.formatText("[2] Increase subsidies for essential medicines        "));
         System.out.println(Extra.formatText("[3] Do nothing                                        "));
     }
-   
+
     //INNOVATION FESTIVAL
     public static void scenario10() {
         Extra.centerText("A tech giant is hosting a city-wide innovation competition, and they’ve invited the city to participate. Winning could bring major investment.");
@@ -117,7 +117,7 @@ public class Scenario {
         System.out.println(Extra.formatText("What should we do?"));
     
         System.out.println(Extra.formatText("[1] Promote the competition with city funding and support.       "));
-        System.out.println(Extra.formatText("[2]Allow only local businesses to participate without city funds."));
+        System.out.println(Extra.formatText("[2] Allow only local businesses to participate without city funds."));
         System.out.println(Extra.formatText("[3] Decline the invitation.                                      "));
     }
     

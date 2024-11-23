@@ -21,7 +21,7 @@ public class Extra {
     public static void centerText(String message) {
         System.out.println("┌" + "─".repeat(82) + "┐");
     
-        int padding = 2; 
+        int padding = 2;
         int maxLineLength = 82 - padding * 2;
     
         String[] words = message.split(" ");

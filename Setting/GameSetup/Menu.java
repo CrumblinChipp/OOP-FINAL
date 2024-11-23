@@ -20,7 +20,6 @@ public class Menu {
                 System.out.println(Extra.formatText("[3] Ranking "));
                 System.out.println(Extra.formatText("[4] Setting "));
                 System.out.println(Extra.formatText("[5] Exit    "));
-
                 
                 int action;
                 while (true) {
@@ -28,16 +27,15 @@ public class Menu {
                     try {
                         action = scanner.nextInt();
                         scanner.nextLine();
-   
                         if (action >= 1 && action <= 5) {
                             System.out.println("└──────────────────────────────────────────────────────────────────────────────────┘");
-                            break; 
+                            break;
                         } else {
                             System.out.println(Extra.formatText("Invalid input. Please enter 1-5."));
                         }
                     } catch (InputMismatchException e) {
                         System.out.println(Extra.formatText("Invalid input. Please enter 1-5."));
-                        scanner.nextLine(); 
+                        scanner.nextLine();
                     }
                 }
                 
@@ -45,7 +43,7 @@ public class Menu {
                     case 1 -> Game.GameRun(user, playerId);
                     case 2 -> {PlayerManager.showGameRecords(playerId); Extra.clearScreen();}
                     case 3 -> RankingManager.displayRankings();
-                    case 4 -> {                
+                    case 4 -> {
                         int settingAction;
                         while (true) {
                             System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────┐");
@@ -59,18 +57,13 @@ public class Menu {
                             try {
                                 settingAction = scanner.nextInt();
                                 scanner.nextLine();
-        
-                                if (settingAction >= 1 && settingAction <= 5) {
-                                    break; 
-                                } else {
-                                    System.out.println(Extra.formatText("Invalid input. Please enter 1-5"));
-                                }
+                                if (settingAction >= 1 && settingAction <= 5) {break;}
+                                else {System.out.println(Extra.formatText("Invalid input. Please pick from 1-5"));}
                             } catch (InputMismatchException e) {
-                                System.out.println(Extra.formatText("Invalid input. Please enter 1-5."));
-                                scanner.nextLine(); 
+                                System.out.println(Extra.formatText("Invalid input. Please pick from 1-5."));
+                                scanner.nextLine();
                             }
                         }
-
                         switch (settingAction){
                             case 1 -> {
                                 System.out.println(Extra.formatText("┌───────────────────────────────────────────────────────┐"));

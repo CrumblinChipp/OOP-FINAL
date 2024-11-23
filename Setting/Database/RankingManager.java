@@ -22,7 +22,7 @@ public class RankingManager {
             """;
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
             
             pstmt.setInt(1, userId);
             pstmt.setBigDecimal(2, roundedScore);
