@@ -81,7 +81,7 @@ public class Game {
                 System.out.print("\t\tPlease enter your choice (1, 2, or 3):");
                 try {
                     choice = input.nextInt();
-                    input.nextLine(); 
+                    input.nextLine();
         
                     if (choice >= 1 && choice <= 3) {
                         break;
@@ -90,14 +90,14 @@ public class Game {
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("\t\tInvalid input. Please enter a number (1, 2, or 3).");
-                    input.nextLine(); 
+                    input.nextLine();
                 }
             }
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
         Decision.applyDecision(randomScenario, choice, city, level);
-        city.pointBonusAllocation(level);
-        city.decayEffect(level);
-        life -= city.criticalSectorChecker(level);
+        cityUI.pointBonusAllocation(level);
+        cityUI.yearlyAdjustment(level);
+        life -= cityUI.criticalSectorChecker(level);
         totalYear++;
 
         scenarioNumbers.remove(Integer.valueOf(randomScenario));

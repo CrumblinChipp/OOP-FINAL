@@ -20,15 +20,15 @@ public abstract class Decision {
         int secondaryChange = getRandomInRange(changes.maxSecondary, changes.minSecondary);
         int fundChange = getRandomInRange(changes.maxFund, changes.minFund);
 
-        city.setAttribute(primaryAttribute, primaryChange);
-        city.setAttribute(secondaryAttribute, secondaryChange);
-        city.setAttribute("fund", fundChange);
+        city.setAttribute(primaryAttribute, city.getAttribute(primaryAttribute) + primaryChange);
+        city.setAttribute(secondaryAttribute, city.getAttribute(secondaryAttribute) + secondaryChange);
+        city.setAttribute("fund", city.getAttribute("fund") + fundChange);
     }
 
     protected static void printDecisionOutcome(String effectSummary, String details) {
         Extra.centerText(effectSummary);
         System.out.println(Extra.formatText(details));
-        System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
+        System.out.println("└──────────────────────────────────────────────────────────────────────────────────┘");
     }
 
 

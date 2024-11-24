@@ -2,9 +2,9 @@ package GameSetup;
 public class Message {
 
 public static void tutorialMessage(int level){
-      int critical;
-      int fund;
-      int morale = 0;
+    int critical;
+    int fund;
+    int morale = 0;
         switch (level) {
             case 1 -> {
                 critical = 8;
@@ -21,29 +21,29 @@ public static void tutorialMessage(int level){
                 fund = 2;
             }
         }
-      System.out.println("  ┌──────────────────────────────────────┐   ┌──────────────────────────────────────┐");
-      System.out.println("         Funds and Morale are given");
-      System.out.println("        based on the city Attribute's                 If one attribute reach");
-      System.out.println("                    Status                             critical Level (<"+critical+"), ");
-      System.out.println("              Attribute = \"HIGH\"                 Emergency Funds will be used." );
-      System.out.println("            Funds + "+fund+", Morale + "+morale);
-      System.out.println("            Attribute = \"MODERATE\"               If Funds is not sufficient,");
-      System.out.println("                  Funds + "+(fund-1)+"                       The City tax will increase ");
-      System.out.println("               Attribute = LOW                    Affecting the citizens Morale.");
-      System.out.println("                  Funds + "+(fund-1));
-      System.out.println("  └──────────────────────────────────────┘   └──────────────────────────────────────┘");
-      System.out.println(Extra.formatText("┌──────────────────────────────────────┐"));
-      System.out.println(Extra.formatText("3 \"Life\" are given."));
-      System.out.println(Extra.formatText("A life will be deducted every time"));
-      System.out.println(Extra.formatText("an attribute reach a critical level."));
-      System.out.println(Extra.formatText("Losing all Life will result"));
-      System.out.println(Extra.formatText("\"GAME OVER\""));
-      System.out.println();
-      System.out.println(Extra.formatText("Reaching a critical level on"));
-      System.out.println(Extra.formatText("\"Fund\" will result to a Attribute"));
-      System.out.println(Extra.formatText("reduction that will take (-5)"));
-      System.out.println(Extra.formatText("points from each attribute."));
-      System.out.println(Extra.formatText("└──────────────────────────────────────┘"));
+    System.out.println("  ┌──────────────────────────────────────┐   ┌──────────────────────────────────────┐");
+    System.out.println("         Funds and Morale are given");
+    System.out.println("        based on the city Attribute's                 If one attribute reach");
+    System.out.println("                    Status                             critical Level (<"+critical+"), ");
+    System.out.println("              Attribute = \"HIGH\"                 Emergency Funds will be used." );
+    System.out.println("            Funds + "+fund+", Morale + "+morale);
+    System.out.println("            Attribute = \"MODERATE\"               If Funds is not sufficient,");
+    System.out.println("                  Funds + "+(fund-1)+"                       The City tax will increase ");
+    System.out.println("               Attribute = LOW                    Affecting the citizens Morale.");
+    System.out.println("                  Funds + "+(fund-1));
+    System.out.println("  └──────────────────────────────────────┘   └──────────────────────────────────────┘");
+    System.out.println(Extra.formatText("┌──────────────────────────────────────┐"));
+    System.out.println(Extra.formatText("3 \"Life\" are given."));
+    System.out.println(Extra.formatText("A life will be deducted every time"));
+    System.out.println(Extra.formatText("an attribute reach a critical level."));
+    System.out.println(Extra.formatText("Losing all Life will result"));
+    System.out.println(Extra.formatText("\"GAME OVER\""));
+    System.out.println();
+    System.out.println(Extra.formatText("Reaching a critical level on"));
+    System.out.println(Extra.formatText("\"Fund\" will result to a Attribute"));
+    System.out.println(Extra.formatText("reduction that will take (-5)"));
+    System.out.println(Extra.formatText("points from each attribute."));
+    System.out.println(Extra.formatText("└──────────────────────────────────────┘"));
 
 
 
@@ -71,28 +71,28 @@ private static void printAchievement(String title, int totalLength, int value) {
             totalBonus += 50;
         }
 
-        if ("HIGH".equals(city.determineStatus(city.getAttribute("fund"))) &&
-            "HIGH".equals(city.determineStatus(city.getAttribute("morale"))) &&
-            "HIGH".equals(city.determineStatus(city.getAttribute("education"))) &&
-            "HIGH".equals(city.determineStatus(city.getAttribute("innovation"))) &&
-            "HIGH".equals(city.determineStatus(city.getAttribute("environment"))) &&
-            "HIGH".equals(city.determineStatus(city.getAttribute("healthcare")))) {
+        if ("HIGH".equals(CityUI.determineStatus(city.getAttribute("fund"))) &&
+            "HIGH".equals(CityUI.determineStatus(city.getAttribute("morale"))) &&
+            "HIGH".equals(CityUI.determineStatus(city.getAttribute("education"))) &&
+            "HIGH".equals(CityUI.determineStatus(city.getAttribute("innovation"))) &&
+            "HIGH".equals(CityUI.determineStatus(city.getAttribute("environment"))) &&
+            "HIGH".equals(CityUI.determineStatus(city.getAttribute("healthcare")))) {
             printAchievement("JACK OF ALL TRADES", totalLength, 200);
             totalBonus += 100;
         }
-        else if ("MODERATE".equals(city.determineStatus(city.getAttribute("fund"))) &&
-        "MODERATE".equals(city.determineStatus(city.getAttribute("morale"))) &&"MODERATE".equals(city.determineStatus(city.getAttribute("education"))) &&
-        "MODERATE".equals(city.determineStatus(city.getAttribute("innovation"))) &&
-        "MODERATE".equals(city.determineStatus(city.getAttribute("environment"))) &&
-        "MODERATE".equals(city.determineStatus(city.getAttribute("healthcare")))){
+        else if ("MODERATE".equals(CityUI.determineStatus(city.getAttribute("fund"))) &&
+        "MODERATE".equals(CityUI.determineStatus(city.getAttribute("morale"))) &&"MODERATE".equals(CityUI.determineStatus(city.getAttribute("education"))) &&
+        "MODERATE".equals(CityUI.determineStatus(city.getAttribute("innovation"))) &&
+        "MODERATE".equals(CityUI.determineStatus(city.getAttribute("environment"))) &&
+        "MODERATE".equals(CityUI.determineStatus(city.getAttribute("healthcare")))){
             printAchievement("LIVING IN MODERATION", totalLength, 150);
             totalBonus += 100;
         }
-        else if ("!!!-LOW-!!!".equals(city.determineStatus(city.getAttribute("fund"))) &&"!!!-LOW-!!!".equals(city.determineStatus(city.getAttribute("morale"))) &&
-        "!!!-LOW-!!!".equals(city.determineStatus(city.getAttribute("education"))) &&
-        "!!!-LOW-!!!".equals(city.determineStatus(city.getAttribute("innovation"))) &&
-        "!!!-LOW-!!!".equals(city.determineStatus(city.getAttribute("environment"))) &&
-        "!!!-LOW-!!!".equals(city.determineStatus(city.getAttribute("healthcare")))) {
+        else if ("!!!-LOW-!!!".equals(CityUI.determineStatus(city.getAttribute("fund"))) &&"!!!-LOW-!!!".equals(CityUI.determineStatus(city.getAttribute("morale"))) &&
+        "!!!-LOW-!!!".equals(CityUI.determineStatus(city.getAttribute("education"))) &&
+        "!!!-LOW-!!!".equals(CityUI.determineStatus(city.getAttribute("innovation"))) &&
+        "!!!-LOW-!!!".equals(CityUI.determineStatus(city.getAttribute("environment"))) &&
+        "!!!-LOW-!!!".equals(CityUI.determineStatus(city.getAttribute("healthcare")))) {
             printAchievement("LIVING AT THE EDGE", totalLength, 50);
             totalBonus += 50;
         }
@@ -138,8 +138,8 @@ private static void printAchievement(String title, int totalLength, int value) {
             totalBonus += 80;
         }
 
-        if ("HIGH".equals(city.determineStatus(city.getAttribute("healthcare"))) &&
-            "HIGH".equals(city.determineStatus(city.getAttribute("environment")))) {
+        if ("HIGH".equals(CityUI.determineStatus(city.getAttribute("healthcare"))) &&
+            "HIGH".equals(CityUI.determineStatus(city.getAttribute("environment")))) {
             printAchievement("GREEN CITY", totalLength, 50);
             totalBonus += 50;
         }
@@ -177,32 +177,32 @@ private static void printAchievement(String title, int totalLength, int value) {
             totalBonus += 75;
         } 
 
-        if ("HIGH".equals(city.determineStatus(city.getAttribute("healthcare"))) &&
-            "HIGH".equals(city.determineStatus(city.getAttribute("innovation")))){
+        if ("HIGH".equals(CityUI.determineStatus(city.getAttribute("healthcare"))) &&
+            "HIGH".equals(CityUI.determineStatus(city.getAttribute("innovation")))){
                 printAchievement("HEALTHY INNOVATION", totalLength, 50);
                 totalBonus += 50;
         }
 
-        if ("HIGH".equals(city.determineStatus(city.getAttribute("education"))) &&
-        "HIGH".equals(city.determineStatus(city.getAttribute("environment")))){
+        if ("HIGH".equals(CityUI.determineStatus(city.getAttribute("education"))) &&
+        "HIGH".equals(CityUI.determineStatus(city.getAttribute("environment")))){
             printAchievement("EDUCATIONAL ECOSYSTEM", totalLength, 50);
         totalBonus += 50;
         }
 
-        if ("HIGH".equals(city.determineStatus(city.getAttribute("education"))) &&
-        "HIGH".equals(city.determineStatus(city.getAttribute("healthcare")))){
+        if ("HIGH".equals(CityUI.determineStatus(city.getAttribute("education"))) &&
+        "HIGH".equals(CityUI.determineStatus(city.getAttribute("healthcare")))){
         printAchievement("HEALTH DEGREE", totalLength, 50);
         totalBonus += 50;
         }
 
-        if ("HIGH".equals(city.determineStatus(city.getAttribute("innovation"))) &&
-        "HIGH".equals(city.determineStatus(city.getAttribute("environment")))){
+        if ("HIGH".equals(CityUI.determineStatus(city.getAttribute("innovation"))) &&
+        "HIGH".equals(CityUI.determineStatus(city.getAttribute("environment")))){
         printAchievement("ECO-INNOVATION", totalLength, 50);
         totalBonus += 50;
         }
 
-        if ("HIGH".equals(city.determineStatus(city.getAttribute("education"))) &&
-        "HIGH".equals(city.determineStatus(city.getAttribute("environment")))){
+        if ("HIGH".equals(CityUI.determineStatus(city.getAttribute("education"))) &&
+        "HIGH".equals(CityUI.determineStatus(city.getAttribute("environment")))){
         printAchievement("EDUCATIONAL ECOSYSTEM", totalLength, 50);
         totalBonus += 50;
         }

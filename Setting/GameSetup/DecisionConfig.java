@@ -2,7 +2,7 @@ package GameSetup;
 
 public class DecisionConfig {
 
-    static class PointChange {
+    public static class PointChange {
         int maxPrimary, minPrimary, maxSecondary, minSecondary, maxFund, minFund;
 
         public PointChange(int maxPrimary, int minPrimary, int maxSecondary, int minSecondary, int maxFund, int minFund) {
