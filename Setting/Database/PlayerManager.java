@@ -14,7 +14,7 @@ public class PlayerManager {
         String sql = "INSERT INTO players (username, password) VALUES (?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             pstmt.executeUpdate();
@@ -27,7 +27,7 @@ public class PlayerManager {
         String query = "SELECT * FROM players WHERE username = ? AND password = ?";
         
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
             
             pstmt.setString(1, username); 
             pstmt.setString(2, password);
@@ -44,7 +44,7 @@ public class PlayerManager {
         String query = "SELECT user_id FROM players WHERE username = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
             
             pstmt.setString(1, username);
             
@@ -150,7 +150,7 @@ public class PlayerManager {
         String sql = "UPDATE players SET username = ? WHERE user_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, newUsername);
             pstmt.setInt(2, userId);
@@ -172,7 +172,7 @@ public class PlayerManager {
         String sql = "SELECT COUNT(*) AS count FROM players WHERE username = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
@@ -194,7 +194,7 @@ public class PlayerManager {
         String sql = "UPDATE players SET password = ? WHERE user_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, newPassword);
             pstmt.setInt(2, userId);
@@ -216,7 +216,7 @@ public class PlayerManager {
         String deleteGameRecordsSql = "DELETE FROM game_records WHERE user_id = ?";
     
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(deleteGameRecordsSql)) {
+            PreparedStatement pstmt = conn.prepareStatement(deleteGameRecordsSql)) {
     
             pstmt.setInt(1, userId);
             int rowsDeleted = pstmt.executeUpdate();

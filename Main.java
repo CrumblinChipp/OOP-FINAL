@@ -22,7 +22,7 @@ public class Main
                 System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────────┐");
                 System.out.println(Extra.formatText("[1] Log in "));
                 System.out.println(Extra.formatText("[2] Sign up"));
-                int action;                
+                int action;
                 while (true) {
                     System.out.print(Extra.centerTextWithInput("Action(1 or 2): "));
                     try {
