@@ -1,4 +1,4 @@
-*City Simulator Game*
+**City Simulator Game**
 *I. Project Overview*
 The City Simulator Game is a console-based simulation where players manage a virtual city by balancing its key attributes: healthcare, education, innovation, environment, fund, and morale. Players make decisions based on real-world scenarios that impact these attributes, with the aim of maintaining an ideal balance and ensuring the city's sustainability. The game features three difficulty levels and incorporates core Object-Oriented Programming (OOP) principles.
 
@@ -9,6 +9,7 @@ The project leverages Object-Oriented Programming principles as follows:
     Inheritance: The game has a base class, City, that contains the general attributes of the city, and specialized classes (such as HealthcareCity, EducationCity) inherit from it, extending functionality specific to each attribute.
     Polymorphism: The game utilizes polymorphism by allowing different scenarios that impact the city’s attributes to be handled through a common interface, while each subclass can implement these scenarios differently.
     Abstraction: Complex details of scenario handling are abstracted into methods that players interact with, without needing to understand the underlying processes. The city management system hides the complexity of calculations behind simplified user interfaces.
+
 *III. Details of the Chosen SDG and Its Integration into the Project*
 The game aligns with UN Sustainable Development Goal (SDG) 11: Sustainable Cities and Communities. This SDG focuses on making cities inclusive, safe, resilient, and sustainable. The game integrates this by simulating decision-making that impacts the sustainability of the city. Players must balance various resources and make ethical choices to improve the city’s attributes, contributing to long-term prosperity and quality of life for its inhabitants.
 
