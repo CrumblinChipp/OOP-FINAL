@@ -30,8 +30,10 @@ IDE (e.g., Visual Studio Code) for development or the terminal for command-line 
 
 3. Run the db/innit.sql script in your database client (e.g., MySQL Workbench, pgAdmin, or SQLite CLI) to create the database and its tables.
 
-4. Navigate to JDBC/DatabaseConnection.java file to change the corresponding variables. 
+4. Navigate to JDBC/DatabaseConnection.java file to change the corresponding variables:
+
     USER = change to your DB username
+
     PASSWORD = change to your DB password.
 
 5. Run the main class.
