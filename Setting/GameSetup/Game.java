@@ -1,10 +1,6 @@
-/// THINGS THAT NEED TO BE DONE
-/// --CITY NAME INPUT FUNCTION
-/// --ADDITIONAL SCENARIOS
-/// --ADDITIONAL ACHIEVEMENT 
 package GameSetup;
-import Database.PlayerManager;
-import Database.RankingManager;
+import JDBC.PlayerManager;
+import JDBC.RankingManager;
 import java.util.*;
 
 public class Game {

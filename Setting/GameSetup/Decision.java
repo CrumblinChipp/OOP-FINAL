@@ -7,7 +7,6 @@ public abstract class Decision {
         this.description = description;
     }
 
-    // Abstract method - must be implemented by subclasses
     public abstract void applyEffect(City city, int level, int choice);
 
     private static int getRandomInRange(int max, int min) {
@@ -52,8 +51,6 @@ public abstract class Decision {
         Decision decision = getDecisionObject(randomScenario);
         decision.applyEffect(city, level, choice);
     }
-
-    // Getter for the decision description
     public String getDescription() {
         return description;
     }

@@ -1,8 +1,8 @@
 package GameSetup;
 
-import Database.DatabaseSetup;
-import Database.PlayerManager;
-import Database.RankingManager;
+import JDBC.DatabaseSetup;
+import JDBC.PlayerManager;
+import JDBC.RankingManager;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

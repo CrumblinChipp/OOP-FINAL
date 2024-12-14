@@ -1,4 +1,4 @@
-package Database;
+package JDBC;
 import GameSetup.Extra;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

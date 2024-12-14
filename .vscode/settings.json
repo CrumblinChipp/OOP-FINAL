@@ -7,5 +7,20 @@
     "cSpell.words": [
         "Envi",
         "pstmt"
+    ],
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "database": "city_simulator",
+            "name": "OOP_DATABASE",
+            "username": "root"
+        }
     ]
 }

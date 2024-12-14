@@ -1,6 +1,7 @@
-import Database.PlayerManager;
 import GameSetup.Extra;
 import GameSetup.Menu;
+import JDBC.PlayerManager;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Main
@@ -8,13 +9,13 @@ public class Main
     public static void main(String[] args)
     {
         String welcome = """
-                         \t__     _________ _______     __  __      __  __     __  ____    ________    __\r
-                         \t\\ \\   / /   ___||   ____|   |  \\/  |    /  \\ \\ \\   / / / __ \\  |  ____  \\  |  |\r
-                         \t \\ \\_/ /|  |__  |  |____    |      |   / /\\ \\ \\ \\_/ / | |  | | | |____| |  |  |\r
-                         \t  \\   / |   __| |______ |   | \\  / |  / /__\\ \\ \\   /  | |  | | |   ___  /  |__|\r
-                         \t   | |  |  |___  _____| |   | |\\/| | / /    \\ \\ | |   | |__| | |  |  \\  \\   __\r
-                         \t   |_|  |______||_______|   |_|  |_|/_/      \\_\\|_|    \\____/  |__|   \\__\\ |__|\r
-                         \t\t\t\t\t CITY SIMULATOR"""
+                        \t__     _________ _______     __  __      __  __     __  ____    ________    __\r
+                        \t\\ \\   / /   ___||   ____|   |  \\/  |    /  \\ \\ \\   / / / __ \\  |  ____  \\  |  |\r
+                        \t \\ \\_/ /|  |__  |  |____    |      |   / /\\ \\ \\ \\_/ / | |  | | | |____| |  |  |\r
+                        \t  \\   / |   __| |______ |   | \\  / |  / /__\\ \\ \\   /  | |  | | |   ___  /  |__|\r
+                        \t   | |  |  |___  _____| |   | |\\/| | / /    \\ \\ | |   | |__| | |  |  \\  \\   __\r
+                        \t   |_|  |______||_______|   |_|  |_|/_/      \\_\\|_|    \\____/  |__|   \\__\\ |__|\r
+                        \t\t\t\t\t CITY SIMULATOR"""
         ;
         try (Scanner input = new Scanner(System.in)) {
             while (true){

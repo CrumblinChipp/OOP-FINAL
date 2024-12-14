@@ -5,9 +5,12 @@ The City Simulator Game is a console-based simulation where players manage a vir
 *II. Explanation of OOP Principles Applied*
 The project leverages Object-Oriented Programming principles as follows:
 
-    Encapsulation: Each city attribute (healthcare, education, innovation, environment, fund, morale) is encapsulated in separate classes with private fields and public getter and setter methods to control access.
-    Inheritance: The game has a base class, City, that contains the general attributes of the city, and specialized classes (such as HealthcareCity, EducationCity) inherit from it, extending functionality specific to each attribute.
-    Polymorphism: The game utilizes polymorphism by allowing different scenarios that impact the city’s attributes to be handled through a common interface, while each subclass can implement these scenarios differently.
+    Encapsulation: Each city attribute (healthcare, education, innovation, environment, fund, morale) is encapsulated with private fields and public getter and setter methods to control access.
+
+    Inheritance: The game has a base class, City, that contains the general attributes of the city, and specialized classes, such as CityUI, inherit from it, extending functionality.
+
+    Polymorphism: The game utilizes polymorphism by allowing different scenarios that impact the city’s attributes to be handled through a common interface.
+
     Abstraction: Complex details of scenario handling are abstracted into methods that players interact with, without needing to understand the underlying processes. The city management system hides the complexity of calculations behind simplified user interfaces.
 
 *III. Details of the Chosen SDG and Its Integration into the Project*

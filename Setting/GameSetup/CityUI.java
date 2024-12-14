@@ -11,7 +11,6 @@ public class CityUI{
     public CityUI(City city) {
         this.city = city;
     }
-
     ///bar creation
     private static String generateProgressBar( int percent) {
         char incomplete = '░';
@@ -66,74 +65,6 @@ public class CityUI{
         System.out.println(String.format("\t%-20s %-16s%-20s %-23s ", "ENVIRONMENT", determineStatus(environment), "INNOVATION", determineStatus(innovation)));
         System.out.println(String.format("\t%-12s   %-44s \n", enviBar, innovationBar));
         System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
-    }
-    
-    //print end game result and return a total score to be recorded
-    public double printEndGame(int level, String user, City city, int years, int life){
-        int fundBonus = 0;
-        double moraleMultiplier = 1;
-        double levelMultiplier= 1;
-        // Get the attribute values
-        int healthcare = city.getAttribute("healthcare");
-        int environment = city.getAttribute("environment");
-        int education = city.getAttribute("education");
-        int innovation = city.getAttribute("innovation");
-        int fund = city.getAttribute("fund");
-        int morale = city.getAttribute("morale");
-
-        switch (determineStatus(fund)) {
-            case "HIGH" -> fundBonus = 100;
-            case "MODERATE" -> fundBonus = 50;
-            case "!!!-LOW-!!!" -> fundBonus = 25;
-        }
-        switch (determineStatus(morale)) {
-            case "HIGH" -> moraleMultiplier = 1.2;
-            case "MODERATE" -> moraleMultiplier = 1.0;
-            case "!!!-LOW-!!!" -> moraleMultiplier = 0.8;
-        }
-        switch (level) {
-            case 1 -> levelMultiplier = 0.8;
-            case 2 -> levelMultiplier = 1;
-            case 3-> levelMultiplier = 1.2;
-        }
-        double attributeScore = (healthcare + environment + education + innovation + fundBonus)*moraleMultiplier;
-
-        // Print the status
-        int totalLength = 50;
-        String heart = "O ";
-        StringBuilder hearts = new StringBuilder();
-        for (int i = 0; i < life; i++) {
-            hearts.append(heart);
-        }
-        System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────┐");
-        System.out.println("\t\t\t\t!!!"+user+"\'s City!!!\n\n\tPlayer: " + user + "\t\tYears: "+years+"\t\t Life: "+hearts+"\n");
-        System.out.println(" ────────────────────────────────────────────────────────────────────────────────────");
-        System.err.println("\t\t\t\t      SCORE");
-
-        String healthDashes = new String(new char[totalLength - "HEALTH".length() - 1]).replace("\0", "-");
-        System.out.println(String.format("\t\tHEALTH %s %d", healthDashes, healthcare));
-
-        String environmentDashes = new String(new char[totalLength - "ENVIRONMENT".length() - 1]).replace("\0", "-");
-        System.out.println(String.format("\t\tENVIRONMENT %s %d", environmentDashes, environment));
-
-        String educationDashes = new String(new char[totalLength - "EDUCATION".length() - 1]).replace("\0", "-");
-        System.out.println(String.format("\t\tEDUCATION %s %d", educationDashes, education));
-
-        String innovationDashes = new String(new char[totalLength - "INNOVATION".length() - 1]).replace("\0", "-");
-        System.out.println(String.format("\t\tINNOVATION %s %d", innovationDashes, innovation));
-        String moraleDashes = new String(new char[totalLength - "MORALE MULTIPLIER".length() - 1]).replace("\0", "-");
-        System.out.println(String.format("\t\tMORALE MULTIPLIER %s x%.2f", moraleDashes, moraleMultiplier));
-        double achievementBonus = (Message.achievementBonus(level, city, attributeScore));
-        double totalScore = (attributeScore + achievementBonus)*levelMultiplier;
-        String levelDashes = new String(new char[totalLength - "LEVEL MULTIPLIER".length() - 1]).replace("\0", "-");
-        System.out.println(String.format("\t\tLEVEL MULTIPLIER %s x%.2f", levelDashes, levelMultiplier));
-        System.out.println();
-        System.out.println("\t_________________________________________________________________");
-        String totalDashes = new String(new char[totalLength - "TOTAL".length() - 1]).replace("\0", "-");
-        System.out.println(String.format("\t\tTOTAL %s %.2f", totalDashes, totalScore));
-        System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
-
-        return totalScore;
     }
     
     //attribute decay per year. differ for each game level
@@ -219,7 +150,6 @@ public class CityUI{
         for (int status : statuses) {
             String currentStatus = determineStatus(status);
         
-            // Define adjustments for each status and level
             Map<String, int[]> fundAdjustments = Map.of(
                 "HIGH", new int[]{3, 3, 2},
                 "MODERATE", new int[]{2, 2, 1},
@@ -247,7 +177,7 @@ public class CityUI{
         }
     }
 
-    ///attribute critical status checking and point application.
+    // attribute critical status checking and point application.
     public int criticalSectorChecker (int level){
         int limit = 0;
         switch (level) {
@@ -316,5 +246,73 @@ public class CityUI{
             adjustAttribute(attribute, -deduction);
         }
     }
+    
+    //print end game result and return a total score to be recorded
+    public double printEndGame(int level, String user, City city, int years, int life){
+        int fundBonus = 0;
+        double moraleMultiplier = 1;
+        double levelMultiplier= 1;
+        // Get the attribute values
+        int healthcare = city.getAttribute("healthcare");
+        int environment = city.getAttribute("environment");
+        int education = city.getAttribute("education");
+        int innovation = city.getAttribute("innovation");
+        int fund = city.getAttribute("fund");
+        int morale = city.getAttribute("morale");
 
+        switch (determineStatus(fund)) {
+            case "HIGH" -> fundBonus = 100;
+            case "MODERATE" -> fundBonus = 50;
+            case "!!!-LOW-!!!" -> fundBonus = 25;
+        }
+        switch (determineStatus(morale)) {
+            case "HIGH" -> moraleMultiplier = 1.2;
+            case "MODERATE" -> moraleMultiplier = 1.0;
+            case "!!!-LOW-!!!" -> moraleMultiplier = 0.8;
+        }
+        switch (level) {
+            case 1 -> levelMultiplier = 0.8;
+            case 2 -> levelMultiplier = 1;
+            case 3-> levelMultiplier = 1.2;
+        }
+        double attributeScore = (healthcare + environment + education + innovation + fundBonus)*moraleMultiplier;
+
+        // Print the status
+        int totalLength = 50;
+        String heart = "O ";
+        StringBuilder hearts = new StringBuilder();
+        for (int i = 0; i < life; i++) {
+            hearts.append(heart);
+        }
+        System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────┐");
+        System.out.println("\t\t\t\t!!!"+user+"\'s City!!!\n\n\tPlayer: " + user + "\t\tYears: "+years+"\t\t Life: "+hearts+"\n");
+        System.out.println(" ────────────────────────────────────────────────────────────────────────────────────");
+        System.err.println("\t\t\t\t      SCORE");
+
+        String healthDashes = new String(new char[totalLength - "HEALTH".length() - 1]).replace("\0", "-");
+        System.out.println(String.format("\t\tHEALTH %s %d", healthDashes, healthcare));
+
+        String environmentDashes = new String(new char[totalLength - "ENVIRONMENT".length() - 1]).replace("\0", "-");
+        System.out.println(String.format("\t\tENVIRONMENT %s %d", environmentDashes, environment));
+
+        String educationDashes = new String(new char[totalLength - "EDUCATION".length() - 1]).replace("\0", "-");
+        System.out.println(String.format("\t\tEDUCATION %s %d", educationDashes, education));
+
+        String innovationDashes = new String(new char[totalLength - "INNOVATION".length() - 1]).replace("\0", "-");
+        System.out.println(String.format("\t\tINNOVATION %s %d", innovationDashes, innovation));
+        String moraleDashes = new String(new char[totalLength - "MORALE MULTIPLIER".length() - 1]).replace("\0", "-");
+        System.out.println(String.format("\t\tMORALE MULTIPLIER %s x%.2f", moraleDashes, moraleMultiplier));
+        double achievementBonus = (Message.achievementBonus(level, city, attributeScore));
+        double totalScore = (attributeScore + achievementBonus)*levelMultiplier;
+        String levelDashes = new String(new char[totalLength - "LEVEL MULTIPLIER".length() - 1]).replace("\0", "-");
+        System.out.println(String.format("\t\tLEVEL MULTIPLIER %s x%.2f", levelDashes, levelMultiplier));
+        System.out.println();
+        System.out.println("\t_________________________________________________________________");
+        String totalDashes = new String(new char[totalLength - "TOTAL".length() - 1]).replace("\0", "-");
+        System.out.println(String.format("\t\tTOTAL %s %.2f", totalDashes, totalScore));
+        System.out.println("└─────────────────────────────────────────────────────────────────────────────────────┘");
+
+        return totalScore;
+    }
+    
 }

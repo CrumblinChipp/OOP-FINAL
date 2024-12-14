@@ -1,4 +1,4 @@
-package Database;
+package JDBC;
 
 import GameSetup.Extra;
 import java.math.BigDecimal;
@@ -45,8 +45,8 @@ public class RankingManager {
         """;
 
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
 
             // Collect results into a list for flexible display
             List<String> topRankings = new ArrayList<>();
