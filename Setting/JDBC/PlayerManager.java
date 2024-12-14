@@ -29,7 +29,7 @@ public class PlayerManager {
         try (Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             
-            pstmt.setString(1, username); 
+            pstmt.setString(1, username);
             pstmt.setString(2, password);
             
             ResultSet resultSet = pstmt.executeQuery();

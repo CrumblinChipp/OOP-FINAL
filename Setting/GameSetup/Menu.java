@@ -1,6 +1,5 @@
 package GameSetup;
 
-import JDBC.DatabaseSetup;
 import JDBC.PlayerManager;
 import JDBC.RankingManager;
 import java.util.InputMismatchException;
@@ -135,7 +134,6 @@ public class Menu {
                                 System.out.println(Extra.formatText("└───────────────────────────────────────────────────────┘"));
                                 if ("CONFIRM".equals(confirm)){
                                     PlayerManager.clearGameRecords(playerId);
-                                    DatabaseSetup.createGameRecordsTable();
                                 }else {
                                     System.out.println(Extra.formatText("CHANGES ARE NOT SAVED"));
                                 }
