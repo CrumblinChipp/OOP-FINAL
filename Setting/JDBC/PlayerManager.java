@@ -1,9 +1,6 @@
 package JDBC;
 import GameSetup.Extra;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -240,7 +237,7 @@ public class PlayerManager {
         Connection conn = null;
         try {
             conn = DatabaseConnection.getConnection();
-            conn.setAutoCommit(false);  
+            conn.setAutoCommit(false); 
 
             try (PreparedStatement pstmtGameRecords = conn.prepareStatement(deleteGameRecordsSql)) {
                 pstmtGameRecords.setInt(1, userId);

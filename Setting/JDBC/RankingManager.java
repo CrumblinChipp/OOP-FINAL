@@ -3,11 +3,7 @@ package JDBC;
 import GameSetup.Extra;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +44,6 @@ public class RankingManager {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
 
-            // Collect results into a list for flexible display
             List<String> topRankings = new ArrayList<>();
 
             while (rs.next()) {
@@ -57,23 +52,19 @@ public class RankingManager {
                 topRankings.add(String.format("%-4d       \t\t\t%-10s", bestScore, username));
             }
 
-            // Print the header
             System.out.println("┌──────────────────────────────────────────────────────────────────────────────────┐");
             System.out.println("                                    Rankings                                      ");
             System.out.println("\n\t\t\tScore          |               Player               ");
             System.out.println("     ________________________________________________________________________");
 
-            // Display top 3 players
             for (int i = 0; i < topRankings.size() && i < 3; i++) {
                 System.out.printf("\tTop %-2d:          %s%n", i + 1, topRankings.get(i));
             }
 
-            // Display the next 7 players if available
             for (int i = 3; i < topRankings.size() && i < 10; i++) {
                 System.out.printf("\t [%-2d]            %s%n", i + 1, topRankings.get(i));
             }
 
-            // Fill in blanks if fewer than 10 players exist
             for (int i = topRankings.size(); i < 10; i++) {
                 System.out.printf("\t [%-2d]         %-4s            %-10s%n", i + 1, "", "");
             }
