@@ -20,6 +20,27 @@ public class PlayerManager {
         }
     }
 
+    public static boolean isUsernameTaken(String username) {
+        String sql = "SELECT COUNT(*) AS count FROM players WHERE username = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next() && rs.getInt("count") > 0) {
+
+                System.out.println(Extra.formatText("Username is already taken. Please choose a different username."));
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error checking username availability: " + e.getMessage());
+        }
+        return false;
+    }
+
     public static boolean checkCredentials(String username, String password) {
         String query = "SELECT * FROM players WHERE username = ? AND password = ?";
         
@@ -163,27 +184,6 @@ public class PlayerManager {
         } catch (SQLException e) {
             System.out.println("Error updating username: " + e.getMessage());
         }
-    }
-
-    public static boolean isUsernameTaken(String username) {
-        String sql = "SELECT COUNT(*) AS count FROM players WHERE username = ?";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, username);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next() && rs.getInt("count") > 0) {
-
-                System.out.println(Extra.formatText("Username is already taken. Please choose a different username."));
-                return true;
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error checking username availability: " + e.getMessage());
-        }
-        return false;
     }
 
     public static void changePassword(int userId, String newPassword) {
